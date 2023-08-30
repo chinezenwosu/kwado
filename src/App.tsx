@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './Home';
-import Room from './Room';
+import Client from './Client';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         </ul>
         <Routes>
           <Route path='/' element={< Home />}></Route>
-          <Route path='/diary/:id' element={< Room />}></Route>
+          <Route path='/diary/:id' element={< Client />}></Route>
         </Routes>
       </div>
     </Router>
