@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from 'react'
-import styled from '@emotion/styled'
 import randomColor from 'randomcolor'
 import { createEditor, BaseEditor } from 'slate'
 import { withHistory } from 'slate-history'
@@ -9,15 +8,12 @@ import { WithSocketIOEditor } from '@slate-collaborative/client/lib/withSocketIO
 import { AutomergeEditor } from '@slate-collaborative/client/lib/automerge-editor'
 import { useParams } from 'react-router-dom'
 import { faker } from '@faker-js/faker'
-import { Instance, Title, H4, Button, Grid } from './Components'
 import EditorFrame from './EditorFrame'
 import { withLinks } from './plugins/link'
 
 const Client = () => {
   const [isOnline, setOnlineState] = useState<boolean>(false)
   const params = useParams()
-  const slug = params.id || ''
-  const id = faker.string.uuid()
   const name = `${faker.person.firstName()} ${faker.person.lastName()}`
 
   const color = useMemo(
@@ -32,6 +28,8 @@ const Client = () => {
 
   const editor = useMemo(() => {
     const slateEditor = withLinks(withReact(withHistory(createEditor())))
+    const slug = params.slug || ''
+    const id = faker.string.uuid()
 
     const origin =
       process.env.NODE_ENV === 'production'
@@ -39,7 +37,7 @@ const Client = () => {
         : 'http://localhost:8000'
 
     const options = {
-      docId: '/' + slug,
+      docId: `/${slug}`,
       cursorData: {
         name,
         color,
@@ -68,40 +66,18 @@ const Client = () => {
 
   const { decorate } = useCursor(editor)
 
-  const toggleOnline = () => {
-    const { connect, disconnect } = editor
-    isOnline ? disconnect() : connect()
-  }
-
-  if (editor.children.length === 0) return <h4>Document does not exist</h4>
-
   return (
-    <Grid>
-      <Instance online={isOnline}>
-        <Title>
-          <Head>Editor: {name}</Head>
-          <div style={{ display: 'flex', marginTop: 10, marginBottom: 10 }}>
-            <Button type="button" onClick={toggleOnline}>
-              Go {isOnline ? 'offline' : 'online'}
-            </Button>
-          </div>
-        </Title>
-
-        <EditorFrame
-          editor={editor}
-          decorate={decorate}
-          defaultValue={editor.children}
-        />
-      </Instance>
-    </Grid>
+    <EditorFrame
+      editor={editor}
+      decorate={decorate}
+      defaultValue={editor.children}
+      name={name}
+      isOnline={isOnline}
+    />
   )
 }
 
 export default Client
-
-const Head = styled(H4)`
-  margin-right: auto;
-`
 
 declare module 'slate' {
   interface CustomTypes {
