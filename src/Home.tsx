@@ -1,8 +1,12 @@
 import { Node } from 'slate'
-import { redirect } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Button } from "./Components"
+import { v4 as uuid } from 'uuid'
+import routes from './utils/routes'
 
 const Home = () => {
+  const navigate = useNavigate()
+
   const onClick = async () => {
     const defaultValue: Node[] = [
       {
@@ -20,14 +24,17 @@ const Home = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ content: defaultValue }),
+      body: JSON.stringify({
+        content: defaultValue,
+        slug: `${Date.now()}-${uuid()}`
+      }),
     }
 
     try {
       const documentRes = await fetch('http://localhost:8000/api/kwadocs', options)
       const document = await documentRes.json()
 
-      console.log('new document ---------------------------', document)
+      navigate(routes.getDiary(document.slug))
     }
     catch(e) {
       console.log('Document load error', e)
