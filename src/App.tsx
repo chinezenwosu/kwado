@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './Home';
 import Client from './Client';
+import routes from './utils/routes';
 
 function App() {
   return (
@@ -13,8 +14,8 @@ function App() {
           </li>
         </ul>
         <Routes>
-          <Route path='/' element={< Home />}></Route>
-          <Route path='/diary/:id' element={< Client />}></Route>
+          <Route path={routes.getHome()} element={< Home />}></Route>
+          <Route path={routes.getDiary(':slug')} element={< Client />}></Route>
         </Routes>
       </div>
     </Router>
