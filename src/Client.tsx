@@ -1,20 +1,39 @@
 import { useState, useEffect, useMemo } from 'react'
 import randomColor from 'randomcolor'
-import { createEditor, BaseEditor } from 'slate'
+import { createEditor } from 'slate'
 import { withHistory } from 'slate-history'
-import { withReact } from 'slate-react'
+import { ReactEditor, withReact } from 'slate-react'
 import { withIOCollaboration, useCursor } from '@slate-collaborative/client'
-import { WithSocketIOEditor } from '@slate-collaborative/client/lib/withSocketIO'
-import { AutomergeEditor } from '@slate-collaborative/client/lib/automerge-editor'
 import { useParams } from 'react-router-dom'
 import { faker } from '@faker-js/faker'
 import EditorFrame from './EditorFrame'
 import { withLinks } from './plugins/link'
+import {
+  Grid,
+  Instance,
+  Title,
+  Button,
+  H4,
+} from './Components'
+import { WithSocketIOEditor } from '@slate-collaborative/client/lib/withSocketIO'
+import { AutomergeEditor } from '@slate-collaborative/client/lib/automerge-editor'
+
+interface IUser {
+  id: string
+  name: string
+}
+
+const createUser = (): IUser => ({
+  id: faker.string.uuid(),
+  name: `${faker.person.firstName()} ${faker.person.lastName()}`
+})
+
+const user = createUser()
 
 const Client = () => {
   const [isOnline, setOnlineState] = useState<boolean>(false)
   const params = useParams()
-  const name = `${faker.person.firstName()} ${faker.person.lastName()}`
+  const { id, name } = user
 
   const color = useMemo(
     () =>
@@ -29,7 +48,6 @@ const Client = () => {
   const editor = useMemo(() => {
     const slateEditor = withLinks(withReact(withHistory(createEditor())))
     const slug = params.slug || ''
-    const id = faker.string.uuid()
 
     const origin =
       process.env.NODE_ENV === 'production'
@@ -66,14 +84,30 @@ const Client = () => {
 
   const { decorate } = useCursor(editor)
 
+  const toggleOnline = () => {
+    const { connect, disconnect } = editor
+    isOnline ? disconnect() : connect()
+  }
+
+  if (!isOnline) return <h4>Document does not exist</h4>
+
   return (
-    <EditorFrame
-      editor={editor}
-      decorate={decorate}
-      defaultValue={editor.children}
-      name={name}
-      isOnline={isOnline}
-    />
+   <Grid>
+      <Instance online={isOnline}>
+        <Title>
+          <H4>Editor: {name}</H4>
+          <div style={{ display: 'flex', marginTop: 10, marginBottom: 10 }}>
+            <Button type="button" onClick={toggleOnline}>
+              Go {isOnline ? 'offline' : 'online'}
+            </Button>
+          </div>
+        </Title>
+        <EditorFrame
+          editor={editor}
+          decorate={decorate}
+        />
+      </Instance>
+    </Grid>
   )
 }
 
@@ -81,6 +115,6 @@ export default Client
 
 declare module 'slate' {
   interface CustomTypes {
-    Editor: BaseEditor & WithSocketIOEditor & AutomergeEditor
+    Editor: ReactEditor & WithSocketIOEditor & AutomergeEditor
   }
 }

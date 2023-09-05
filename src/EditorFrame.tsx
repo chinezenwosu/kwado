@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import { Node } from 'slate'
 import {
   Slate,
@@ -8,16 +8,7 @@ import {
   RenderLeafProps,
   useSlate
 } from 'slate-react'
-import {
-  ClientFrame,
-  IconButton,
-  Icon,
-  Grid,
-  Instance,
-  Title,
-  Button,
-  H4,
-} from './Components'
+import { ClientFrame, IconButton, Icon } from './Components'
 import Caret from './Caret'
 import { isBlockActive, toggleBlock } from './plugins/block'
 import { isMarkActive, toggleMark } from './plugins/mark'
@@ -26,80 +17,65 @@ import { isLinkActive, insertLink, unwrapLink } from './plugins/link'
 export interface EditorFrameProps {
   editor: ReactEditor
   decorate: any
-  defaultValue: Node[]
-  name: string
-  isOnline: boolean
 }
 
 const renderElement = (props: any) => <Element {...props} />
 
-const EditorFrame: React.FC<EditorFrameProps> = ({
-  editor,
-  decorate,
-  defaultValue,
-  name,
-  isOnline,
-}) => {
-  const renderLeaf = useCallback((props: any) => <Leaf {...props} />, [])
-
-  const toggleOnline = () => {
-    const { connect, disconnect } = editor
-    isOnline ? disconnect() : connect()
+const defaultValue: Node[] = [
+  {
+    type: 'paragraph',
+    children: [
+      {
+        text: ''
+      }
+    ]
   }
+]
 
-  if (defaultValue.length === 0) return <h4>Document does not exist</h4>
+const EditorFrame: React.FC<EditorFrameProps> = ({ editor, decorate }) => {
+  const renderLeaf = useCallback((props: any) => <Leaf {...props} />, [])
+  const [value, setValue] = useState<Node[]>(defaultValue)
 
   return (
-    <Grid>
-      <Instance online={isOnline}>
-        <Title>
-          <H4>Editor: {name}</H4>
-          <div style={{ display: 'flex', marginTop: 10, marginBottom: 10 }}>
-            <Button type="button" onClick={toggleOnline}>
-              Go {isOnline ? 'offline' : 'online'}
-            </Button>
-          </div>
-        </Title>
-        <ClientFrame>
-          <Slate
-            editor={editor}
-            initialValue={defaultValue}
-          >
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                position: 'sticky',
-                top: 0,
-                paddingBottom: '2rem',
-                backgroundColor: 'white',
-                zIndex: 1
-              }}
-            >
-              <MarkButton format="bold" icon="format_bold" />
-              <MarkButton format="italic" icon="format_italic" />
-              <MarkButton format="underline" icon="format_underlined" />
-              <MarkButton format="code" icon="code" />
+    <ClientFrame>
+      <Slate
+        editor={editor}
+        initialValue={value}
+        onChange={(value: Node[]) => setValue(value)}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            position: 'sticky',
+            top: 0,
+            paddingBottom: '2rem',
+            backgroundColor: 'white',
+            zIndex: 1
+          }}
+        >
+          <MarkButton format="bold" icon="format_bold" />
+          <MarkButton format="italic" icon="format_italic" />
+          <MarkButton format="underline" icon="format_underlined" />
+          <MarkButton format="code" icon="code" />
 
-              <BlockButton format="heading-one" icon="looks_one" />
-              <BlockButton format="heading-two" icon="looks_two" />
-              <BlockButton format="block-quote" icon="format_quote" />
+          <BlockButton format="heading-one" icon="looks_one" />
+          <BlockButton format="heading-two" icon="looks_two" />
+          <BlockButton format="block-quote" icon="format_quote" />
 
-              <BlockButton format="numbered-list" icon="format_list_numbered" />
-              <BlockButton format="bulleted-list" icon="format_list_bulleted" />
+          <BlockButton format="numbered-list" icon="format_list_numbered" />
+          <BlockButton format="bulleted-list" icon="format_list_bulleted" />
 
-              <LinkButton />
-            </div>
+          <LinkButton />
+        </div>
 
-            <Editable
-              renderElement={renderElement}
-              renderLeaf={renderLeaf}
-              decorate={decorate}
-            />
-          </Slate>
-        </ClientFrame>
-      </Instance>
-    </Grid>
+        <Editable
+          renderElement={renderElement}
+          renderLeaf={renderLeaf}
+          decorate={decorate}
+        />
+      </Slate>
+    </ClientFrame>
   )
 }
 
