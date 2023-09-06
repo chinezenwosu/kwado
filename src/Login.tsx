@@ -1,10 +1,12 @@
+import { useState } from 'react'
 import axios from 'axios'
-import LoginForm from './forms/Login'
+import LoginForm from './forms/LoginForm'
 import { useAuth } from './hooks/useAuth'
 import { config } from './utils/config'
 
 const Login = () => {
   const { login } = useAuth()
+  const [error, setError] = useState('')
   
   const handleLogin = async ({ email, password }: { email: string, password: string }) => {
     try {
@@ -21,15 +23,14 @@ const Login = () => {
       login()
       window.location.reload()
     }
-    catch(e) {
-      console.log('Login error', e)
-      throw new Error('Login error')
+    catch(err: any) {
+      setError(err.response.data)
     }
   }
 
   return (
     <div>
-      <LoginForm handleLogin={handleLogin} />
+      <LoginForm handleLogin={handleLogin} error={error} />
     </div>
   )
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 // TODO: add form verification
 interface SignupFormProps {
+  error: string,
   handleSignup: ({
     firstName,
     lastName,
@@ -15,8 +16,7 @@ interface SignupFormProps {
   }) => void
 }
 
-const SignupForm: React.FC<SignupFormProps> = ({ handleSignup }) => {
-  const [error, setError] = useState('')
+const SignupForm: React.FC<SignupFormProps> = ({ handleSignup, error }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     firstName: '',
@@ -35,12 +35,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ handleSignup }) => {
     event.preventDefault()
 
     setIsLoading(true)
-    try {
-      handleSignup({ firstName, lastName, email, password })
-    }
-    catch (err) {
-      setError(err as string)
-    }
+    handleSignup({ firstName, lastName, email, password })
     setIsLoading(false)
   }
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 interface LoginFormProps {
+  error: string,
   handleLogin: ({
     email,
     password,
@@ -10,8 +11,7 @@ interface LoginFormProps {
   }) => void
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ handleLogin }) => {
-  const [error, setError] = useState('')
+const LoginForm: React.FC<LoginFormProps> = ({ handleLogin, error }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
@@ -28,26 +28,16 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleLogin }) => {
     event.preventDefault()
 
     setIsLoading(true)
-    try {
-      handleLogin({ email, password })
-    }
-    catch (err) {
-      setError(err as string)
-    }
+    handleLogin({ email, password })
     setIsLoading(false)
   }
 
   const onClick = async () => {
     setIsLoading(true)
-    try {
-      handleLogin({
-        email: 'chineze@yahoo.com',
-        password: 'afttdsy',
-      })
-    }
-    catch (err) {
-      setError(err as string)
-    }
+    handleLogin({
+      email: 'chineze@yahoo.com',
+      password: 'afttdsy',
+    })
     setIsLoading(false)
   }
 

@@ -1,10 +1,12 @@
+import { useState } from 'react'
 import axios from 'axios'
-import SignupForm from './forms/Signup'
+import SignupForm from './forms/SignupForm'
 import { config } from './utils/config'
 import { useAuth } from './hooks/useAuth'
 
 const Signup = () => {
-  const { login } = useAuth() 
+  const [error, setError] = useState('')
+  const { login } = useAuth()
 
   const handleSignup = async ({ firstName, lastName, email, password }: {
     firstName: string,
@@ -28,15 +30,14 @@ const Signup = () => {
       login()
       window.location.reload()
     }
-    catch(e) {
-      console.log('Signup error', e)
-      throw new Error('Signup error')
+    catch(err: any) {
+      setError(err.response.data)
     }
   }
 
   return (
     <div>
-      <SignupForm handleSignup={handleSignup} />
+      <SignupForm handleSignup={handleSignup} error={error} />
     </div>
   )
 }
