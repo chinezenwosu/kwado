@@ -17,18 +17,24 @@ import { isLinkActive, insertLink, unwrapLink } from './plugins/link'
 export interface EditorFrameProps {
   editor: ReactEditor
   decorate: any
-  defaultValue: Node[]
 }
 
 const renderElement = (props: any) => <Element {...props} />
 
-const EditorFrame: React.FC<EditorFrameProps> = ({
-  editor,
-  decorate,
-  defaultValue
-}) => {
-  const [value, setValue] = useState<Node[]>(defaultValue)
+const defaultValue: Node[] = [
+  {
+    type: 'paragraph',
+    children: [
+      {
+        text: ''
+      }
+    ]
+  }
+]
+
+const EditorFrame: React.FC<EditorFrameProps> = ({ editor, decorate }) => {
   const renderLeaf = useCallback((props: any) => <Leaf {...props} />, [])
+  const [value, setValue] = useState<Node[]>(defaultValue)
 
   return (
     <ClientFrame>
