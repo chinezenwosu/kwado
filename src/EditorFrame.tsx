@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { useState, useCallback } from 'react'
 import { Node } from 'slate'
+import { CursorEditor } from 'slate-yjs'
 import {
   Slate,
   ReactEditor,
@@ -8,33 +9,23 @@ import {
   RenderLeafProps,
   useSlate
 } from 'slate-react'
-import { ClientFrame, IconButton, Icon } from './Components'
-import Caret from './Caret'
-import { isBlockActive, toggleBlock } from './plugins/block'
 import { isMarkActive, toggleMark } from './plugins/mark'
+import { isBlockActive, toggleBlock } from './plugins/block'
+import { ClientFrame, IconButton, Icon } from './Components'
 import { isLinkActive, insertLink, unwrapLink } from './plugins/link'
+import Caret from './Caret'
+import useCursors from 'slate-yjs'
 
 export interface EditorFrameProps {
-  editor: ReactEditor
-  decorate: any
+  editor: CursorEditor & ReactEditor
 }
 
 const renderElement = (props: any) => <Element {...props} />
 
-const defaultValue: Node[] = [
-  {
-    type: 'paragraph',
-    children: [
-      {
-        text: ''
-      }
-    ]
-  }
-]
-
-const EditorFrame: React.FC<EditorFrameProps> = ({ editor, decorate }) => {
+const EditorFrame: React.FC<EditorFrameProps> = ({ editor }) => {
   const renderLeaf = useCallback((props: any) => <Leaf {...props} />, [])
-  const [value, setValue] = useState<Node[]>(defaultValue)
+  const [value, setValue]  = useState<Node[]>(editor.children)
+  const { decorate } = useCursors(editor)
 
   return (
     <ClientFrame>
