@@ -8,41 +8,49 @@ import { BrowserRouter as Router,
   useLocation,
 } from 'react-router-dom'
 import Home from './Home'
-import Client from './Client'
 import routes from './utils/routes'
 import Login from './Login'
 import Signup from './Signup'
-import { config } from './utils/config'
 import Dashboard from './Dashboard'
-import './App.css'
+import Diary from './Diary'
+import { config } from './utils/config'
 import { AuthContext } from './context/AuthContext'
 import { useAuth } from './hooks/useAuth'
+import './App.css'
+
 interface RouteWrapperProps {
   children: ReactElement
 }
 
 const App = () => {
   const { user, loginWithUser, isAuthInitialized } = useAuth()
-
-  const ProtectedRoute: React.FC<RouteWrapperProps> = ({ children }) => {
-    const location = useLocation()
-
-    if (isAuthInitialized && !user) {
-      return <Navigate to={routes.getLogin()} replace state={{ from: location }} />
-    }
-  
-    return children
-  }
-
-  const PublicRoute: React.FC<RouteWrapperProps> = ({ children }) => {
-    const location = useLocation()
-
-    if (isAuthInitialized && user) {
-      return <Navigate to={routes.getDashboard()} replace state={{ from: location }} />
-    }
-  
-    return children
-  }
+  const routesList = [
+    {
+      path: routes.getHome(),
+      element: <Home />,
+      requiresAuth: false,
+    },
+    {
+      path: routes.getLogin(),
+      element: <Login />,
+      requiresAuth: false,
+    },
+    {
+      path: routes.getSignup(),
+      element: <Signup />,
+      requiresAuth: false,
+    },
+    {
+      path: routes.getDashboard(),
+      element: <Dashboard />,
+      requiresAuth: true,
+    },
+    {
+      path: routes.getDiary(':slug'),
+      element: <Diary />,
+      requiresAuth: true,
+    },
+  ]
 
   useEffect(() => {
     if (isAuthInitialized && !user) {
@@ -55,56 +63,71 @@ const App = () => {
     }
   }, [isAuthInitialized])
 
+  if (!isAuthInitialized) return null
+
+  const ProtectedRoute: React.FC<RouteWrapperProps> = ({ children }) => {
+    const location = useLocation()
+
+    if (!user) {
+      return <Navigate to={routes.getLogin()} replace state={{ from: location }} />
+    }
+  
+    return children
+  }
+
+  const PublicRoute: React.FC<RouteWrapperProps> = ({ children }) => {
+    const location = useLocation()
+
+    if (user) {
+      return <Navigate to={routes.getDashboard()} replace state={{ from: location }} />
+    }
+  
+    return children
+  }
+
+  let nav = (
+    <ul>
+      <li>
+        <Link to={routes.getHome()}>Home</Link>
+      </li>
+    </ul>
+  )
+
+  if (user) {
+    nav = (
+      <ul>
+        <li>
+          <Link to={routes.getDashboard()}>Dashboard</Link>
+        </li>
+      </ul>
+    )
+  }
+
   return (
     <AuthContext.Provider value={{ user, setUser: () => null }}>
       <Router>
         <div>
-          <ul>
-            <li>
-                <Link to="/">Home</Link>
-            </li>
-          </ul>
+          { nav }
           <Routes>
-            <Route
-              path={routes.getHome()}
-              element={
-                <PublicRoute>
-                  <Home />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path={routes.getLogin()}
-              element={
-                <PublicRoute>
-                  <Login />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path={routes.getSignup()}
-              element={
-                <PublicRoute>
-                  <Signup />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path={routes.getDashboard()}
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path={routes.getDiary(':slug')}
-              element={
-                <ProtectedRoute>
-                  <Client />
-                </ProtectedRoute>
-              }
-            />
+            {
+              routesList.map((route) => (
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  element={
+                    route.requiresAuth ? (
+                      <ProtectedRoute>
+                        { route.element }
+                      </ProtectedRoute>
+                    ) : (
+                      <PublicRoute>
+                        { route.element }
+                      </PublicRoute>
+                    )
+                  }
+                />
+              ))
+            }
           </Routes>
         </div>
       </Router>

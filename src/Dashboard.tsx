@@ -27,6 +27,8 @@ const Dashboard = () => {
       const documentRes = await axios.post(`${config.url.api}/kwadocs`, {
         content: defaultValue,
         slug: `${Date.now()}-${uuid()}`,
+      }, {
+        withCredentials: true,
       })
 
       navigate(routes.getDiary(documentRes.data.slug))

@@ -36,7 +36,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleLogin, error }) => {
     setIsLoading(true)
     handleLogin({
       email: 'chineze@yahoo.com',
-      password: 'afttdsy',
+      password: 'password',
     })
     setIsLoading(false)
   }
