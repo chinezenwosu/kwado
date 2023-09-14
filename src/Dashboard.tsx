@@ -1,4 +1,3 @@
-import { Node } from 'slate'
 import { useNavigate } from 'react-router-dom'
 import { Button } from "./Components"
 import { v4 as uuid } from 'uuid'
@@ -12,7 +11,7 @@ const Dashboard = () => {
   const navigate = useNavigate()
 
   const onClick = async () => {
-    const defaultValue: Node[] = [
+    const defaultValue = [
       {
         type: 'paragraph',
         children: [
