@@ -14,7 +14,7 @@ import { isBlockActive, toggleBlock } from './plugins/block'
 import { ClientFrame, IconButton, Icon } from './Components'
 import { isLinkActive, insertLink, unwrapLink } from './plugins/link'
 import Caret from './Caret'
-import useCursors from 'slate-yjs'
+import useCursors from './hooks/useCursors'
 
 export interface EditorFrameProps {
   editor: CursorEditor & ReactEditor

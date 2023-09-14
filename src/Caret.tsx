@@ -1,21 +1,23 @@
 import React from 'react'
 
 interface CaretProps {
-  color: string
   isForward: boolean
-  name: string
+  data: { 
+    name: string
+    color: string
+  }
 }
 
-const Caret: React.FC<CaretProps> = ({ color, isForward, name }) => {
+const Caret: React.FC<CaretProps> = ({ data, isForward }) => {
   const cursorStyles = {
     ...cursorStyleBase,
-    background: color,
-    left: isForward ? '100%' : '0%'
+    background: data.color,
+    left: isForward ? '100%' : '0%',
   }
   const caretStyles = {
     ...caretStyleBase,
-    background: color,
-    left: isForward ? '100%' : '0%'
+    background: data.color,
+    left: isForward ? '100%' : '0%',
   }
 
   caretStyles[isForward ? 'bottom' : 'top'] = 0
@@ -25,7 +27,7 @@ const Caret: React.FC<CaretProps> = ({ color, isForward, name }) => {
       <span contentEditable={false} style={caretStyles}>
         <span style={{ position: 'relative' }}>
           <span contentEditable={false} style={cursorStyles}>
-            {name}
+            {data.name}
           </span>
         </span>
       </span>
@@ -45,7 +47,7 @@ const cursorStyleBase = {
   padding: '0.2em',
   color: 'white',
   background: 'palevioletred',
-  whiteSpace: 'nowrap'
+  whiteSpace: 'nowrap',
 } as any
 
 const caretStyleBase = {
@@ -54,5 +56,5 @@ const caretStyleBase = {
   userSelect: 'none',
   height: '1.2em',
   width: 2,
-  background: 'palevioletred'
+  background: 'palevioletred',
 } as any
