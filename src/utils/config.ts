@@ -1,7 +1,7 @@
 const config = {
   url: {
-    api: process.env.REACT_APP_API_URL as string,
-    websocket: process.env.REACT_APP_WEBSOCKET_URL as string,
+    api: import.meta.env.VITE_API_URL as string,
+    websocket: import.meta.env.VITE_WEBSOCKET_URL as string,
   }
 }
 
