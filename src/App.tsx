@@ -9,6 +9,7 @@ import { BrowserRouter as Router,
 import Home from './Home'
 import routes from './utils/routes'
 import Login from './Login'
+import Logout from './Logout'
 import Signup from './Signup'
 import Diary from './Diary'
 import Dashboard from './pages/Dashboard'
@@ -30,6 +31,11 @@ const App = () => {
       path: routes.getLogin(),
       element: <Login />,
       requiresAuth: false,
+    },
+    {
+      path: routes.getLogout(),
+      element: <Logout />,
+      requiresAuth: true,
     },
     {
       path: routes.getSignup(),

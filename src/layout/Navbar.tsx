@@ -16,6 +16,10 @@ const Navbar = () => {
         path: routes.getDashboard(),
         label: 'Dashboard',
       },
+      {
+        path: routes.getLogout(),
+        label: 'Log out',
+      },
     ],
     [authKeys.LOGGED_OUT]: [
       {
