@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import axios from 'axios'
-import { useAuth } from './hooks/useAuth'
-import { config } from './utils'
+import { useAuth } from '../../hooks/useAuth'
+import { config } from '../../utils'
 
 const Login = () => {
   const { logout } = useAuth()

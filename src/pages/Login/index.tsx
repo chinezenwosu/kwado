@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import axios from 'axios'
-import LoginForm from './forms/LoginForm'
-import { useAuth } from './hooks/useAuth'
-import { config } from './utils'
+import LoginForm from './Form'
+import { useAuth } from '../../hooks/useAuth'
+import { config } from '../../utils'
 
 const Login = () => {
   const { login } = useAuth()
