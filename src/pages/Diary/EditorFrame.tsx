@@ -9,12 +9,12 @@ import {
   RenderLeafProps,
   useSlate
 } from 'slate-react'
-import { isMarkActive, toggleMark } from './plugins/mark'
-import { isBlockActive, toggleBlock } from './plugins/block'
+import { isMarkActive, toggleMark } from '../../plugins/mark'
+import { isBlockActive, toggleBlock } from '../../plugins/block'
 import { ClientFrame, IconButton, Icon } from './Components'
-import { isLinkActive, insertLink, unwrapLink } from './plugins/link'
+import { isLinkActive, insertLink, unwrapLink } from '../../plugins/link'
 import Caret from './Caret'
-import useCursors from './hooks/useCursors'
+import useCursors from '../../hooks/useCursors'
 
 export interface EditorFrameProps {
   editor: CursorEditor & ReactEditor

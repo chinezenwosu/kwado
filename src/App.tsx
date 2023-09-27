@@ -6,15 +6,14 @@ import { BrowserRouter as Router,
   Navigate,
   useLocation,
 } from 'react-router-dom'
-import routes from './utils/routes'
+import Navbar from './layout/Navbar'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Logout from './pages/Logout'
 import Signup from './pages/Signup'
-import Diary from './Diary'
+import Diary from './pages/Diary'
 import Dashboard from './pages/Dashboard'
-import Navbar from './layout/Navbar'
-import { config } from './utils'
+import { config, routes } from './utils'
 import { useAuth } from './hooks/useAuth'
 import { AuthContext } from './context/AuthContext'
 import './App.css'
