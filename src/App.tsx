@@ -1,9 +1,8 @@
-import { useEffect, ReactElement } from 'react'
+import { useEffect } from 'react'
 import axios from 'axios'
 import { BrowserRouter as Router,
   Routes,
   Route,
-  Link,
   Navigate,
   useLocation,
 } from 'react-router-dom'
@@ -11,16 +10,13 @@ import Home from './Home'
 import routes from './utils/routes'
 import Login from './Login'
 import Signup from './Signup'
-import Dashboard from './Dashboard'
 import Diary from './Diary'
-import { config } from './utils/config'
-import { AuthContext } from './context/AuthContext'
+import Dashboard from './Dashboard'
+import Navbar from './layout/Navbar'
+import { config } from './utils'
 import { useAuth } from './hooks/useAuth'
+import { AuthContext } from './context/AuthContext'
 import './App.css'
-
-interface RouteWrapperProps {
-  children: ReactElement
-}
 
 const App = () => {
   const { user, loginWithUser, isAuthInitialized } = useAuth()
@@ -65,7 +61,7 @@ const App = () => {
 
   if (!isAuthInitialized) return null
 
-  const ProtectedRoute: React.FC<RouteWrapperProps> = ({ children }) => {
+  const ProtectedRoute: React.FC<React.PropsWithChildren> = ({ children }) => {
     const location = useLocation()
 
     if (!user) {
@@ -75,7 +71,7 @@ const App = () => {
     return children
   }
 
-  const PublicRoute: React.FC<RouteWrapperProps> = ({ children }) => {
+  const PublicRoute: React.FC<React.PropsWithChildren> = ({ children }) => {
     const location = useLocation()
 
     if (user) {
@@ -85,51 +81,31 @@ const App = () => {
     return children
   }
 
-  let nav = (
-    <ul>
-      <li>
-        <Link to={routes.getHome()}>Home</Link>
-      </li>
-    </ul>
-  )
-
-  if (user) {
-    nav = (
-      <ul>
-        <li>
-          <Link to={routes.getDashboard()}>Dashboard</Link>
-        </li>
-      </ul>
-    )
-  }
-
   return (
     <AuthContext.Provider value={{ user, setUser: () => null }}>
       <Router>
-        <div>
-          { nav }
-          <Routes>
-            {
-              routesList.map((route) => (
-                <Route
-                  key={route.path}
-                  path={route.path}
-                  element={
-                    route.requiresAuth ? (
-                      <ProtectedRoute>
-                        { route.element }
-                      </ProtectedRoute>
-                    ) : (
-                      <PublicRoute>
-                        { route.element }
-                      </PublicRoute>
-                    )
-                  }
-                />
-              ))
-            }
-          </Routes>
-        </div>
+        <Navbar />
+        <Routes>
+          {
+            routesList.map((route) => (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={
+                  route.requiresAuth ? (
+                    <ProtectedRoute>
+                      { route.element }
+                    </ProtectedRoute>
+                  ) : (
+                    <PublicRoute>
+                      { route.element }
+                    </PublicRoute>
+                  )
+                }
+              />
+            ))
+          }
+        </Routes>
       </Router>
     </AuthContext.Provider>
   )

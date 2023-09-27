@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import SignupForm from './forms/SignupForm'
-import { config } from './utils/config'
+import { config } from './utils'
 import { useAuth } from './hooks/useAuth'
 
 const Signup = () => {

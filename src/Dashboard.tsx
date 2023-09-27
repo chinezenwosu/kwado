@@ -3,7 +3,7 @@ import { Button } from "./Components"
 import { v4 as uuid } from 'uuid'
 import axios from 'axios'
 import routes from './utils/routes'
-import { config } from './utils/config'
+import { config } from './utils'
 import { useAuth } from './hooks/useAuth'
 
 const Dashboard = () => {
