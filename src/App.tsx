@@ -90,7 +90,7 @@ const App = () => {
   return (
     <AuthContext.Provider value={{ user, setUser: () => null }}>
       <Router>
-        <Navbar />
+        <Navbar isLoggedIn={!!user} />
         <Routes>
           {
             routesList.map((route) => (

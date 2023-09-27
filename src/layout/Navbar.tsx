@@ -1,15 +1,13 @@
 import { Link } from "react-router-dom"
 import { routes } from "../utils"
-import { useAuth } from "../hooks/useAuth"
 
 const authKeys = {
   LOGGED_OUT: 'LOGGED_OUT',
   LOGGED_IN: 'LOGGED_IN',
 }
 
-const Navbar = () => {
-  const { user } = useAuth()
-  const authStatus = user ? authKeys.LOGGED_IN : authKeys.LOGGED_OUT
+const Navbar = ({ isLoggedIn }: { isLoggedIn: Boolean }) => {
+  const authStatus = isLoggedIn ? authKeys.LOGGED_IN : authKeys.LOGGED_OUT
   const navMap = {
     [authKeys.LOGGED_IN]: [
       {
