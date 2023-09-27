@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
-import SignupForm from './Form'
+import SignupForm from './components/Form'
 import { config } from '../../utils'
 import { useAuth } from '../../hooks/useAuth'
 
