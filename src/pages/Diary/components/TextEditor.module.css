@@ -1,0 +1,35 @@
+.editor {
+  background-color: var(--white);
+  border: 1px solid #c7c7c7;
+  margin: 15px auto;
+  max-width: calc(100vw - 32px);
+  min-height: 90vh;
+  position: relative;
+}
+
+@media only screen and (min-width: 768px) {
+  .editor {
+    margin: 20px auto;
+    max-width: 680px;
+    padding: 25px 20px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .editor {
+    max-width: 80vw;
+    margin: 30px auto;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .editor {
+    max-width: 50vw;
+  }
+}
+
+@media only screen and (min-width: 2400px) {
+  .editor {
+    max-width: 1200px;
+  }
+}

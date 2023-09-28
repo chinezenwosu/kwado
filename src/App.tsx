@@ -90,27 +90,29 @@ const App = () => {
     <AuthContext.Provider value={{ user, setUser: () => null }}>
       <Router>
         <Navbar isLoggedIn={!!user} />
-        <Routes>
-          {
-            routesList.map((route) => (
-              <Route
-                key={route.path}
-                path={route.path}
-                element={
-                  route.requiresAuth ? (
-                    <ProtectedRoute>
-                      { route.element }
-                    </ProtectedRoute>
-                  ) : (
-                    <PublicRoute>
-                      { route.element }
-                    </PublicRoute>
-                  )
-                }
-              />
-            ))
-          }
-        </Routes>
+        <main>
+          <Routes>
+            {
+              routesList.map((route) => (
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  element={
+                    route.requiresAuth ? (
+                      <ProtectedRoute>
+                        { route.element }
+                      </ProtectedRoute>
+                    ) : (
+                      <PublicRoute>
+                        { route.element }
+                      </PublicRoute>
+                    )
+                  }
+                />
+              ))
+            }
+          </Routes>
+        </main>
       </Router>
     </AuthContext.Provider>
   )
