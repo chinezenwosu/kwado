@@ -1,5 +1,5 @@
 import io, { Socket } from 'socket.io-client'
-import { config } from "../utils"
+import { config } from '../utils'
 
 const socketConnection = {
   getSocket: () => {
