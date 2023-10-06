@@ -1,25 +1,11 @@
-import { useState, useEffect, useMemo, useContext } from 'react'
-import io, { Socket } from 'socket.io-client'
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { AuthContext } from '../../context/AuthContext'
-import { config } from '../../utils'
-import randomColor from 'randomcolor'
-import {
-  Grid,
-  Instance,
-  Title,
-  H4,
-} from './Components'
-import 'react-quill/dist/quill.snow.css'
-import TextEditor from './components/TextEditor'
+import { DeltaStatic } from 'quill'
+import { Grid, Instance } from './Components'
 import Toolbar from './components/Toolbar'
-
-const socketEmissions = {
-  GET_DOCUMENT: 'GET_DOCUMENT',
-  LOAD_DOCUMENT: 'LOAD_DOCUMENT',
-  SEND_DOCUMENT_CONTENT_CHANGES: 'SEND_DOCUMENT_CONTENT_CHANGES',
-  RECEIVE_DOCUMENT_CONTENT_CHANGES: 'RECEIVE_DOCUMENT_CONTENT_CHANGES',
-}
+import TextEditor from './components/TextEditor'
+import socketConnection, { EditorSocket } from '../../lib/socketConnection'
+import 'react-quill/dist/quill.snow.css'
 
 const fetchState = {
   LOADING: 0,
@@ -28,39 +14,26 @@ const fetchState = {
 }
 
 const Diary = () => {
-  const [socket, setSocket] = useState<Socket | null>(null)
-  const [document, setDocument] = useState(null)
+  const [socket, setSocket] = useState<EditorSocket | null>(null)
+  const [document, setDocument] = useState<DeltaStatic | null>(null)
   const [fetchStatus, setFetchStatus]  = useState(fetchState.LOADING)
   const { slug = '' } = useParams()
-  const { user } = useContext(AuthContext)
-  const { firstName = '', lastName = '' } = user || {}
-  const name = `${firstName} ${lastName}`.trim()
-
-  const color = useMemo(
-    () =>
-      randomColor({
-        luminosity: 'dark',
-        format: 'rgba',
-        alpha: 1
-      }),
-    []
-  )
 
   useEffect(() => {
-    const soc = io(config.url.websocket)
-    setSocket(soc)
+    const editorSocket = socketConnection.getSocket()
+    setSocket(editorSocket)
 
     return () => {
-      soc.disconnect()
+      editorSocket.disconnect()
     }
   }, [])
 
   useEffect(() => {
     if (socket === null) return
+    
+    socket.emit(socketConnection.editorEmissions.GET_DOCUMENT, slug)
 
-    socket.emit(socketEmissions.GET_DOCUMENT, slug)
-
-    socket.once(socketEmissions.LOAD_DOCUMENT, (data) => {
+    socket.once(socketConnection.editorEmissions.LOAD_DOCUMENT, (data) => {
       if (!data) {
         setFetchStatus(fetchState.MISSING)
         return
@@ -77,11 +50,11 @@ const Diary = () => {
   return (
     <Grid>
       <Instance online={socket.connected}>
-        <Title>
-          <H4>Editor: {name}</H4>
-        </Title>
         <Toolbar />
-        <TextEditor socket={socket} document={document} />
+        <TextEditor
+          socket={socket}
+          document={document}
+        />
       </Instance>
     </Grid>
   )

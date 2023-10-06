@@ -1,17 +1,11 @@
 import { useEffect, useRef } from 'react'
-import { Socket } from 'socket.io-client'
 import ReactQuill, { Value } from 'react-quill'
-import { modules } from './Toolbar'
-import { DeltaStatic } from 'quill'
+import Quill, { DeltaStatic } from 'quill'
+import { toolbarModules } from './Toolbar'
+import withCursors from '../../../hoc/withCursors'
+import socketConnection, { EditorSocket } from '../../../lib/socketConnection'
 import styles from './TextEditor.module.css'
 import 'react-quill/dist/quill.snow.css'
-
-const socketEmissions = {
-  GET_DOCUMENT: 'GET_DOCUMENT',
-  LOAD_DOCUMENT: 'LOAD_DOCUMENT',
-  SEND_DOCUMENT_CONTENT_CHANGES: 'SEND_DOCUMENT_CONTENT_CHANGES',
-  RECEIVE_DOCUMENT_CONTENT_CHANGES: 'RECEIVE_DOCUMENT_CONTENT_CHANGES',
-}
 
 type Payload = {
   payload: {
@@ -20,22 +14,34 @@ type Payload = {
   }
 }
 
-const TextEditor = ({ socket, document }: { socket: Socket, document: DeltaStatic }) => {
+const TextEditor = ({ socket, document }: {
+  socket: EditorSocket,
+  document: DeltaStatic,
+}) => {
   const editorRef = useRef<ReactQuill>(null)
 
-  useEffect(() => {
-    const editor = editorRef.current
+  const initializeSelection = (editor: Quill) => {
+    if (!editor.getSelection()) {
+      editor.setSelection(editor.getLength(), 0)
+    }
+  }
 
-    if (editor === null) return
+  useEffect(() => {
+    const quill = editorRef.current
+
+    if (quill === null) return
+
+    const editor = quill.getEditor()
+    initializeSelection(editor)
 
     const contentHandler = (data: Payload) => {
-      editor.getEditor().updateContents(data.payload.delta)
+      editor.updateContents(data.payload.delta)
     }
 
-    socket.on(socketEmissions.RECEIVE_DOCUMENT_CONTENT_CHANGES, contentHandler)
+    socket.on(socketConnection.editorEmissions.RECEIVE_DOCUMENT_CONTENT_CHANGES, contentHandler)
 
     return () => {
-      socket.off(socketEmissions.RECEIVE_DOCUMENT_CONTENT_CHANGES, contentHandler)
+      socket.off(socketConnection.editorEmissions.RECEIVE_DOCUMENT_CONTENT_CHANGES, contentHandler)
     }
   }, [editorRef.current])
 
@@ -51,7 +57,7 @@ const TextEditor = ({ socket, document }: { socket: Socket, document: DeltaStati
   const onChange = (_content: string, delta: DeltaStatic, source: String, editor: ReactQuill.UnprivilegedEditor) => {
     if (source !== 'user') return
 
-    socket.volatile.emit(socketEmissions.SEND_DOCUMENT_CONTENT_CHANGES, {
+    socket.volatile.emit(socketConnection.editorEmissions.SEND_DOCUMENT_CONTENT_CHANGES, {
       payload: {
         delta,
         data: editor.getContents(),
@@ -59,13 +65,19 @@ const TextEditor = ({ socket, document }: { socket: Socket, document: DeltaStati
     })
   }
 
+  const modules = {
+    toolbar: toolbarModules,
+  }
+
+  const Editor = withCursors(ReactQuill)({ socket })
+
   return (
-    <ReactQuill
+    <Editor
       ref={editorRef}
       className={styles.editor}
       placeholder="Start typing something..."
       theme="snow"
-      readOnly={true}
+      readOnly={document === null}
       value={document}
       onChange={onChange}
       modules={modules}

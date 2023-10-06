@@ -159,19 +159,17 @@ const Toolbar = () => (
   </div>
 )
 
-const modules = {
-  toolbar: {
-    container: `#${TOOLBAR_ID}`,
-    handlers: {
-      undo: function() {
-        (this as any).quill.history.undo()
-      },
-      redo: function() {
-        (this as any).quill.history.redo()
-      },
+const toolbarModules = {
+  container: `#${TOOLBAR_ID}`,
+  handlers: {
+    undo: function() {
+      (this as any).quill.history.undo()
+    },
+    redo: function() {
+      (this as any).quill.history.redo()
     },
   },
 }
 
 export default Toolbar
-export { modules }
+export { toolbarModules }
