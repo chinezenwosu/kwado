@@ -2,26 +2,16 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { config, routes } from '../../utils'
 import Button from '../../components/Button'
+import { defaultEditorValue } from '../Diary/components/TextEditor'
 import styles from './Dashboard.module.css'
 
 const Diary = () => {
   const navigate = useNavigate()
 
   const createDiary = async () => {
-    const defaultValue = [
-      {
-        type: 'paragraph',
-        children: [
-          {
-            text: 'Dear Diary,'
-          }
-        ]
-      }
-    ]
-
     try {
       const documentRes = await axios.post(`${config.url.api}/kwadocs`, {
-        content: defaultValue,
+        content: defaultEditorValue,
         slug: `${Date.now()}-${crypto.randomUUID()}`,
       }, {
         withCredentials: true,

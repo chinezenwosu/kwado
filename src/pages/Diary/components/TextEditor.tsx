@@ -7,10 +7,12 @@ import socketConnection, { EditorSocket } from '../../../lib/socketConnection'
 import styles from './TextEditor.module.css'
 import 'react-quill/dist/quill.snow.css'
 
+export const defaultEditorValue = {}
+
 type Payload = {
   payload: {
     data: Value,
-    delta: DeltaStatic
+    delta: DeltaStatic,
   }
 }
 
