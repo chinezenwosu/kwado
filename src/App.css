@@ -30,6 +30,10 @@ html, body {
   clear: both;
 }
 
+.main {
+  margin-top: 60px;
+}
+
 .ql-container.ql-snow,
 .ql-toolbar.ql-snow {
   border: none !important;

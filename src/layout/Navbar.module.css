@@ -28,6 +28,7 @@
   padding: 0;
 }
 
+.navLink,
 .navButton {
 	background-color: unset;
 	border: none;

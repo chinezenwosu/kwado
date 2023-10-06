@@ -1,5 +1,7 @@
-import { Link } from "react-router-dom"
-import { routes } from "../utils"
+import { Link } from 'react-router-dom'
+import { routes } from '../utils'
+import Logo from '../assets/images/logo.svg'
+import styles from './Navbar.module.css'
 
 const authKeys = {
   LOGGED_OUT: 'LOGGED_OUT',
@@ -32,15 +34,32 @@ const Navbar = ({ isLoggedIn }: { isLoggedIn: Boolean }) => {
   }
 
   return (
-    <ul>
-      {
-        navMap[authStatus].map((item) => (
-          <li key={item.path}>
-            <Link to={item.path}>{item.label}</Link>
-          </li>
-        ))
-      }
-    </ul>
+    <nav className={styles.nav}>
+      <div className={styles.navHead}>
+        <div className={styles.logoContainer}>
+          <a href={routes.getHome()}>
+            <img src={Logo} className={styles.logo} />
+          </a>
+        </div>
+        <label htmlFor="menu-toggle">
+          <div className={styles.toggleIcon}>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </label>
+      </div>
+      <input type="checkbox" id="menu-toggle" className={styles.menuToggle} />
+      <ul className={styles.navLinks}>
+        {
+          navMap[authStatus].map((item) => (
+            <li key={item.path}>
+              <Link to={item.path} className={styles.navLink}>{item.label}</Link>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
   )
 }
 
