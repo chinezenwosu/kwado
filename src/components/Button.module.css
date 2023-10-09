@@ -1,0 +1,17 @@
+.button {
+  background: var(--primary);
+  border-radius: 24px;
+  border: 2px solid var(--primary);
+  color: var(--white);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.875rem;
+  max-width: calc(100vw - 20px);
+  padding: 0.5rem 1.5rem;
+  transition: all 150ms ease-in-out;
+  width: max-content;
+}
+
+.button:hover {
+  opacity: 0.8;
+}

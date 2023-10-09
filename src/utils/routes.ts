@@ -5,6 +5,9 @@ const routes = {
   getLogin: () => {
     return '/login'
   },
+  getLogout: () => {
+    return '/logout'
+  },
   getSignup: () => {
     return '/signup'
   },

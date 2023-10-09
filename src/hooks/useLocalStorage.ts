@@ -1,20 +1,14 @@
-import { useState } from 'react'
-
 const ONE_HOUR = 1000 * 60 * 60
 
 export const useLocalStorage = () => {
-  const [value, setValue] = useState<string | null>(null)
-
   const setItem = (key: string, val: string) => {
     localStorage.setItem(key, val)
-    setValue(val)
   }
 
   const getItem = (key: string) => {
     const item = localStorage.getItem(key)
 
     if (item && item !== 'undefined') {
-      setValue(item)
       return item
     }
 
@@ -35,7 +29,6 @@ export const useLocalStorage = () => {
     const item = getItem(key)
 
     if (!item) {
-      setValue(null)
       return null
     }
 
@@ -47,17 +40,14 @@ export const useLocalStorage = () => {
     }
 
     const valueString = JSON.stringify(itemObject.value)
-    setValue(valueString)
     return valueString || null
   }
 
   const removeItem = (key: string) => {
     localStorage.removeItem(key)
-    setValue(null)
   }
 
   return {
-    value,
     setItem,
     getItem,
     setItemWithExpiry,

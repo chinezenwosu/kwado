@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import axios from 'axios'
-import SignupForm from './forms/SignupForm'
-import { config } from './utils/config'
-import { useAuth } from './hooks/useAuth'
+import SignupForm from './components/Form'
+import { config } from '../../utils'
+import { useAuth } from '../../hooks/useAuth'
 
 const Signup = () => {
   const [error, setError] = useState('')

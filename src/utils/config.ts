@@ -1,7 +1,8 @@
 const config = {
   url: {
-    api: process.env.REACT_APP_API_URL,
+    api: import.meta.env.VITE_API_URL as string,
+    websocket: import.meta.env.VITE_SERVER_URL as string,
   }
 }
 
-export { config }
+export default config
