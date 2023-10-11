@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useUser, User } from './useUser'
 import { useLocalStorage } from './useLocalStorage'
+import * as authApi from '../api/auth'
 
 export const useAuth = () => {
   const { user, addUser, removeUser } = useUser()
@@ -17,17 +18,47 @@ export const useAuth = () => {
     setIsAuthInitialized(true)
   }, [])
 
-  const login = () => {
-    setLoggedIn(true)
+  const login = async (user: authApi.LoginDetails) => {
+    const { data, error } = await authApi.login(user)
+    if (!error) {
+      setLoggedIn(true)
+    }
+
+    return { data, error }
   }
 
-  const loginWithUser = (user: User) => {
-    addUser(user)
+  const signup = async (user: authApi.SignupDetails) => {
+    const { data, error } = await authApi.signup(user)
+    if (!error) {
+      setLoggedIn(true)
+    }
+
+    return { data, error }
   }
 
-  const logout = () => {
-    removeUser()
+  const loginWithSession = async () => {
+    const { data } = await authApi.loginWithSession()
+    if (data?.isLoggedIn) {
+      addUser(data.user)
+    }
   }
 
-  return { isAuthInitialized, user, login, logout, loginWithUser, loggedIn }
+  const logout = async () => {
+    const { data, error } = await authApi.logout()
+    if (!error) {
+      removeUser()
+    }
+
+    return { data, error }
+  }
+
+  return {
+    isAuthInitialized,
+    user,
+    login,
+    signup,
+    logout,
+    loginWithSession,
+    loggedIn,
+  }
 }

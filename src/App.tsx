@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import axios from 'axios'
 import { BrowserRouter as Router,
   Routes,
   Route,
@@ -13,13 +12,13 @@ import Logout from './pages/Logout'
 import Signup from './pages/Signup'
 import Diary from './pages/Diary'
 import Dashboard from './pages/Dashboard'
-import { config, routes } from './utils'
+import { routes } from './utils'
 import { useAuth } from './hooks/useAuth'
 import { AuthContext } from './context/AuthContext'
 import './App.css'
 
 const App = () => {
-  const { user, loginWithUser, isAuthInitialized } = useAuth()
+  const { user, loginWithSession, isAuthInitialized } = useAuth()
   const routesList = [
     {
       path: routes.getHome(),
@@ -55,12 +54,7 @@ const App = () => {
 
   useEffect(() => {
     if (isAuthInitialized && !user) {
-      axios.get(`${config.url.api}/users/session`, { withCredentials: true })
-        .then(({ data }) => {
-          if (data.isLoggedIn) {
-            loginWithUser(data.user)
-          }
-        })
+      loginWithSession()
     }
   }, [isAuthInitialized])
 
