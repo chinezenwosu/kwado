@@ -3,7 +3,9 @@ import { config } from '../utils'
 
 const socketConnection = {
   getSocket: () => {
-    return io(config.url.websocket)
+    return io(config.url.websocket, {
+      withCredentials: true
+    })
   },
   editorEmissions: {
     GET_DOCUMENT: 'GET_DOCUMENT',
