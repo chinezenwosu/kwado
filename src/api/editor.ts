@@ -3,10 +3,12 @@ import fetch, { Response } from '../lib/fetch'
 const createDiary = async() => {
   let response: Response = {}
   const defaultEditorValue = {}
+  const defaultHtmlValue = '<p></p>'
 
   try {
     const documentRes = await fetch.post('kwadocs', {
       content: defaultEditorValue,
+      html: defaultHtmlValue,
       slug: `${Date.now()}-${crypto.randomUUID()}`,
     })
 
