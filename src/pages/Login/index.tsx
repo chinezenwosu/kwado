@@ -11,7 +11,7 @@ const Login = () => {
     const { error } = await login({ email, password })
 
     if (error) {
-      setError(error)
+      setError(error?.response?.data)
     } else {
       window.location.reload()
     }
