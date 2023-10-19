@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router,
   Routes,
   Route,
@@ -6,6 +6,7 @@ import { BrowserRouter as Router,
   useLocation,
 } from 'react-router-dom'
 import Navbar from './layout/Navbar'
+import SideNavbar from './layout/SideNavbar'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Logout from './pages/Logout'
@@ -83,7 +84,8 @@ const App = () => {
   return (
     <AuthContext.Provider value={{ user, setUser: () => null }}>
       <Router>
-        <Navbar isLoggedIn={!!user} />
+        <Navbar loggedInUser={user} />
+        <SideNavbar />
         <main className="main">
           <Routes>
             {

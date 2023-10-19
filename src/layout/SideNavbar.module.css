@@ -1,0 +1,92 @@
+.sideNav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #f9f9f9;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+  /* background: #FFA41C; */
+  background: #FBC87C;
+}
+
+.sideNav a {
+  align-items: center;
+  color: #0e2350;
+  display: flex;
+  padding: 10px 10px 10px 16px;
+  text-decoration: none;
+  transition: 0.3s;
+  white-space: nowrap;
+}
+
+.sideNav a:hover {
+  color: #333;
+}
+
+.sideNavCheckbox {
+  display: none;
+}
+
+.sideNavCheckbox ~ .sideNav {
+  width: 61px;
+}
+
+.sideNavCheckbox ~ .main {
+  margin-left: 61px;
+}
+
+.sideNavCheckbox:checked ~ .sideNav {
+  width: 250px;
+}
+
+.sideNavCheckbox:checked ~ .main {
+  margin-left: 250px;
+}
+
+.sideNavCheckbox:checked ~ .sideNav .sideMenuLink {
+  opacity: 1;
+}
+
+.sideNavCheckbox:checked ~ .sideNav {
+  background-color: #f9f9f9;
+}
+
+.sideNavTrigger {
+  display: flex;
+  padding: 0 15px;
+}
+
+.sideMenuIcon {
+  display: flex;
+  padding: 2px;
+  margin-right: 17px;
+}
+
+.sideMenuLink {
+  transition: opacity 0.5s;
+  opacity: 0;
+}
+
+.sideNavLinks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sideNavLink {
+	background-color: unset;
+	border: none;
+	color: var(--white);
+	cursor: pointer;
+	padding: 0;
+	text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.sideNavLinks li:nth-child(1) {
+	padding-top: 15px;
+}

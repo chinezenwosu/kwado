@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.14",
     "axios": "^1.5.1",
     "quill-cursors": "^4.0.2",
     "randomcolor": "^0.6.2",

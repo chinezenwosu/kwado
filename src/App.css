@@ -2,7 +2,7 @@
   --black: #000000;
   --white: #ffffff;
   --bg-default: #f9fbfd;
-  --bg-nav: #0e2350;
+  --bg-nav: rgba(14, 35, 80, 0.9);
   --primary: #1180af;
   --font-family-default: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;
   --font-family-editor: Arial, Helvetica, sans-serif;
@@ -32,6 +32,10 @@ html, body {
 
 .main {
   margin-top: 60px;
+  transition: margin-left 0.5s;
+  padding: 20px;
+  overflow: hidden;
+  width: 100%;
 }
 
 .ql-container.ql-snow,
