@@ -1,13 +1,20 @@
-.container { 
-  height: 100vh;
-  position: relative;
+.dashboard {
+  display: flex;
+  flex-direction: row;
 }
 
-.center {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+.dashboard > * {
+  min-height: 100vh;
+}
+
+.container { 
+  padding: 20px 15px 15px 15px;
+  width: 100%;
+  height: 100vh;
+}
+
+.diaryListContainer {
+  width: 450px;
+  border-right: 1px solid #ececec;
+  overflow-y: scroll;
 }

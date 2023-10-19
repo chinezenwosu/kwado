@@ -1,0 +1,11 @@
+.button {
+  align-items: center;
+  background: #ececec;
+  border-radius: 6px;
+  border: 2px solid #ececec;
+  color: var(--black);
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  width: 100%;
+}

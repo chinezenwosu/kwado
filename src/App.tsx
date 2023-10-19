@@ -86,7 +86,7 @@ const App = () => {
       <Router>
         <Navbar loggedInUser={user} />
         <SideNavbar />
-        <main className="main">
+        <main>
           <Routes>
             {
               routesList.map((route) => (

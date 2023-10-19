@@ -9,17 +9,17 @@ const SideNavbar = () => {
     {
       path: routes.getDashboard(),
       label: 'Dashboard',
-      icon: <GridView />,
+      Icon: GridView,
     },
     {
       path: '#',
       label: 'Notes',
-      icon: <SubjectRounded />,
+      Icon: SubjectRounded,
     },
     {
       path: routes.getLogout(),
       label: 'Log out',
-      icon: <LogoutOutlined />,
+      Icon: LogoutOutlined,
     },
   ]
 
@@ -27,16 +27,23 @@ const SideNavbar = () => {
     <div className={styles.sideNav}>
       <ul className={styles.sideNavLinks}>
         {
-          navLinks.map((item) => (
-            <li key={item.path}>
-              <Link to={item.path} className={styles.navLink}>
-                <span className={styles.sideMenuIcon}>
-                  {item.icon}
-                </span>
-                <span className={styles.sideMenuLink}>{item.label}</span>
-              </Link>
-            </li>
-          ))
+          navLinks.map((item) => {
+            let linkClass = styles.sideMenuLink
+            if (item.path === window.location.pathname) {
+              linkClass += ` ${styles.active}`
+            }
+
+            return (
+              <li key={item.path}>
+                <Link to={item.path} className={linkClass}>
+                  <span className={styles.sideMenuIcon}>
+                    <item.Icon />
+                  </span>
+                  <span className={styles.sideMenuLabel}>{item.label}</span>
+                </Link>
+              </li>
+            )
+          })
         }
       </ul>
     </div>

@@ -30,10 +30,9 @@ html, body {
   clear: both;
 }
 
-.main {
+main {
   margin-top: 60px;
   transition: margin-left 0.5s;
-  padding: 20px;
   overflow: hidden;
   width: 100%;
 }

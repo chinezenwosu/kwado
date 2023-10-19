@@ -1,13 +1,17 @@
+import React, { ReactNode } from 'react'
 import styles from './Button.module.css'
 
 type ButtonProps = {
-  label: String,
+  children: ReactNode,
   onClick: () => void,
+  className: string,
 }
 
-const Button = ({ label, onClick }: ButtonProps) => {
+const Button = ({ children, onClick, className }: ButtonProps) => {
   return (
-    <button className={styles.button} onClick={onClick}>{ label }</button>
+    <button className={`${styles.button} ${className}`} onClick={onClick}>
+      { children }
+    </button>
   )
 }
 
