@@ -18,3 +18,12 @@
   border-right: 1px solid #ececec;
   overflow-y: scroll;
 }
+
+.diaryListContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.diaryListContainer {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

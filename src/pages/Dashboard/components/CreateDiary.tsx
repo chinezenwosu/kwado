@@ -23,7 +23,7 @@ const CreateDiary = () => {
       className={styles.button}
       onClick={handleCreateDiary}
     >
-      <AddRounded fontSize="small" />
+      <AddRounded />
       Create new diary
     </Button>
   )

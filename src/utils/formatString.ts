@@ -10,7 +10,7 @@ const formatString = {
   getUserFullName: (user: User | null) => {
     const { firstName = '', lastName = '' } = user || {}
     return `${firstName} ${lastName}`.trim()
-  }
+  },
 }
 
 export default formatString

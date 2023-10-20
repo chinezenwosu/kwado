@@ -1,5 +1,5 @@
 import React from 'react'
-import { routes } from '../../../utils'
+import { formatDate, routes } from '../../../utils'
 import styles from './DiaryList.module.css'
 
 const DiaryList = ({ diaries }) => {
@@ -17,12 +17,24 @@ const DiaryList = ({ diaries }) => {
 }
 
 const Display = ({ diary }) => {
-  const diaryText = diary.html.replace( /(<([^>]+)>)/ig, ' ')
+  let diaryText = diary.html.replace( /(<([^>]+)>)/ig, ' ')
+  let diaryTextClass = ''
+
+  if (!diaryText.trim()) {
+    diaryText = 'No diary entry found'
+    diaryTextClass = styles.emptyDiaryText
+  }
 
   return (
     <a className={styles.card} href={routes.getDiary(diary.slug)} target='_blank'>
+      <h5 className={styles.title}>
+        Diary entry from { formatDate.fromNow(diary.createdAt) }
+      </h5>
       <p className={styles.content}>
-        <span>{ diaryText }</span>
+        <span className={diaryTextClass}>{ diaryText }</span>
+      </p>
+      <p className={styles.updateTime}>
+        Updated { formatDate.fromNow(diary.updatedAt) }
       </p>
     </a>
   )

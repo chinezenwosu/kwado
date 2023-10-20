@@ -6,6 +6,6 @@
   color: var(--black);
   display: flex;
   gap: 5px;
-  justify-content: center;
+  padding: 10px 15px 10px 13px;
   width: 100%;
 }

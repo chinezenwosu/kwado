@@ -1,16 +1,23 @@
 .card {
-  background: #f4f4f4;
+  background: #fbfbfb;
   border-radius: 6px;
   color: black;
-  display: flex;
-  margin: 15px 0;
-  padding: 15px;
+  display: block;
+  margin: 20px 0;
+  padding: 35px 18px;
   text-decoration: none;
+}
+
+.title {
+  font-size: 1rem;
+  margin: 0;
 }
 
 .content {
   flex: 1;
   min-width: 0;
+  margin: 0;
+  margin-top: 10px;
 }
 
 .content span {
@@ -21,4 +28,17 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   word-wrap: break-word;
+}
+
+.emptyDiaryText {
+  color: #666666;
+  font-style: italic;
+}
+
+.updateTime {
+  color: #999999;
+  font-size: 0.8rem;
+  margin: 0;
+  margin-top: 2rem;
+  text-align: right;
 }

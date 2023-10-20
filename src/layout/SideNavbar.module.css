@@ -70,6 +70,10 @@
   margin-right: 17px;
 }
 
+.sideMenuIcon:hover {
+  color: #ef5d1e;
+}
+
 .sideMenuLabel {
   font-size: 0.925rem;
   transition: opacity 0.5s;
