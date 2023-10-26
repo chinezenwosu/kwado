@@ -73,6 +73,10 @@
 .sideMenuLabel {
   font-size: 0.925rem;
   transition: opacity 0.5s;
+  opacity: 0.5;
+}
+
+.sideMenuLink.active .sideMenuLabel {
   opacity: 1;
 }
 

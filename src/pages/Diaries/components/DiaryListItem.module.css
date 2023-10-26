@@ -2,7 +2,6 @@
   background: #f6f6f6;
   border-radius: 6px;
   border: none;
-  color: black;
   cursor: pointer;
   display: block;
   font-family: inherit;
@@ -44,6 +43,7 @@
 .emptyDiaryText {
   color: #666666;
   font-style: italic;
+  opacity: 0.6;
 }
 
 .updateTime {
