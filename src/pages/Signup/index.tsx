@@ -1,13 +1,18 @@
 import { useState } from 'react'
 import SignupForm from './components/Form'
 import { useAuth } from '../../hooks/useAuth'
-import { SignupDetails } from '../../api/auth'
+import { SignedUpUser } from '../../types/User'
 
 const Signup = () => {
   const [error, setError] = useState('')
   const { signup } = useAuth()
 
-  const handleSignup = async ({ firstName, lastName, email, password }: SignupDetails) => {
+  const handleSignup = async ({
+    firstName,
+    lastName,
+    email,
+    password
+  }: SignedUpUser) => {
     const { error } = await signup({
       firstName,
       lastName,

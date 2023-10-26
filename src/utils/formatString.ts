@@ -1,4 +1,4 @@
-import { User } from '../hooks/useUser'
+import { User } from '../types/User'
 
 const formatString = {
   hyphenToUpperCamelCase: (str: String) => {

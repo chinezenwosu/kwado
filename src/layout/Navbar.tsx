@@ -5,7 +5,7 @@ import { MenuRounded } from '@mui/icons-material'
 import Logo from '../assets/images/logo.svg'
 import styles from './Navbar.module.css'
 import sideNavStyles from './SideNavbar.module.css'
-import { User } from '../hooks/useUser'
+import { User } from '../types/User'
 
 const authKeys = {
   LOGGED_OUT: 'LOGGED_OUT',

@@ -1,12 +1,6 @@
 import { useState } from 'react'
 import { useLocalStorage } from './useLocalStorage'
-
-// NOTE: optimally move this into a separate file
-export interface User {
-  firstName: string
-  lastName: string
-  email: string
-}
+import { User } from '../types/User'
 
 export const useUser = () => {
   const [user, setUser] = useState<User | null>(null)

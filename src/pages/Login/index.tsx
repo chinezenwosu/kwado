@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import LoginForm from './components/Form'
 import { useAuth } from '../../hooks/useAuth'
-import { LoginDetails } from '../../api/auth'
+import { LoggedInUser } from '../../types/User'
 
 const Login = () => {
   const { login } = useAuth()
   const [error, setError] = useState('')
   
-  const handleLogin = async ({ email, password }: LoginDetails) => {
+  const handleLogin = async ({ email, password }: LoggedInUser) => {
     const { error } = await login({ email, password })
 
     if (error) {

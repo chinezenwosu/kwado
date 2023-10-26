@@ -1,18 +1,7 @@
 import fetch, { Response } from '../lib/fetch'
+import { LoggedInUser, SignedUpUser } from '../types/User'
 
-export type LoginDetails = {
-  email: string
-  password: string
-}
-
-export type SignupDetails = {
-  firstName: string
-  lastName: string
-  email: string
-  password: string
-}
-
-const login = async(data: LoginDetails) => {
+const login = async(data: LoggedInUser) => {
   let response: Response = {}
   const { email, password } = data
 
@@ -44,7 +33,7 @@ const loginWithSession = async() => {
   }
 }
 
-const signup = async(data: SignupDetails) => {
+const signup = async(data: SignedUpUser) => {
   let response: Response = {}
   const { firstName, lastName, email, password } = data
 

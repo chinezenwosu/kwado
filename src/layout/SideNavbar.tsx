@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useLocation, useMatch } from 'react-router-dom'
 import { routes } from '../utils'
 import { LogoutOutlined, GridView, SubjectRounded } from '@mui/icons-material'
-import { User } from '../hooks/useUser'
+import { User } from '../types/User'
 import styles from './SideNavbar.module.css'
 
 const SideNavbar = ({ loggedInUser }: { loggedInUser: User | null }) => {
