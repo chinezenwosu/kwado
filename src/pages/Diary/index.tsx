@@ -21,7 +21,7 @@ const Diary = () => {
   const fetchStatusRef = useRef(fetchStatus)
   const { slug = '' } = useParams()
 
-  const setFetchStatusAndRef = (state) => {
+  const setFetchStatusAndRef = (state: number) => {
     setFetchStatus(state)
     fetchStatusRef.current = state
   }
