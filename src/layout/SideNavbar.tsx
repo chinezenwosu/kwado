@@ -1,10 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useMatch } from 'react-router-dom'
 import { routes } from '../utils'
 import { LogoutOutlined, GridView, SubjectRounded } from '@mui/icons-material'
 import styles from './SideNavbar.module.css'
 
 const SideNavbar = () => {
+  const location = useLocation()
   const navLinks = [
     {
       path: routes.getDashboard(),
@@ -12,8 +13,8 @@ const SideNavbar = () => {
       Icon: GridView,
     },
     {
-      path: '#',
-      label: 'Notes',
+      path: routes.getDiary(':slug'),
+      label: 'Diaries',
       Icon: SubjectRounded,
     },
     {
@@ -29,7 +30,9 @@ const SideNavbar = () => {
         {
           navLinks.map((item) => {
             let linkClass = styles.sideMenuLink
-            if (item.path === window.location.pathname) {
+            const match = useMatch(item.path)
+
+            if (match?.pathname === location.pathname) {
               linkClass += ` ${styles.active}`
             }
 
