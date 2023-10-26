@@ -4,7 +4,6 @@ import { routes } from '../../../utils'
 import Button from '../../../components/Button'
 import { createDiary } from '../../../api/editor'
 import { AddRounded } from '@mui/icons-material'
-
 import styles from './CreateDiary.module.css'
 
 const CreateDiary = () => {

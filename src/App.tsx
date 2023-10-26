@@ -13,14 +13,22 @@ import Logout from './pages/Logout'
 import Signup from './pages/Signup'
 import Diary from './pages/Diary'
 import Dashboard from './pages/Dashboard'
+import Diaries from './pages/Diaries'
 import { routes } from './utils'
 import { useAuth } from './hooks/useAuth'
 import { AuthContext } from './context/AuthContext'
 import './App.css'
 
+type RouteObject = {
+  path: string
+  element: React.JSX.Element
+  requiresAuth: boolean
+  children?: RouteObject[]
+}
+
 const App = () => {
   const { user, loginWithSession, isAuthInitialized } = useAuth()
-  const routesList = [
+  const routesList: RouteObject[] = [
     {
       path: routes.getHome(),
       element: <Home />,
@@ -47,9 +55,16 @@ const App = () => {
       requiresAuth: true,
     },
     {
-      path: routes.getDiary(':slug'),
-      element: <Diary />,
+      path: routes.getDiaries(),
+      element: <Diaries />,
       requiresAuth: true,
+      children: [
+        {
+          path: routes.getDiary(':slug'),
+          element: <Diary />,
+          requiresAuth: true,
+        },
+      ],
     },
   ]
 
@@ -81,32 +96,36 @@ const App = () => {
     return children
   }
 
+  const getRoutes = (routes: RouteObject[] | undefined) => {
+    return (routes || []).map((route) => (
+      <Route
+        key={route.path}
+        path={route.path}
+        element={
+          route.requiresAuth ? (
+            <ProtectedRoute>
+              { route.element }
+            </ProtectedRoute>
+          ) : (
+            <PublicRoute>
+              { route.element }
+            </PublicRoute>
+          )
+        }
+      >
+        { getRoutes(route.children) }
+      </Route>
+    ))
+  }
+
   return (
     <AuthContext.Provider value={{ user, setUser: () => null }}>
       <Router>
         <Navbar loggedInUser={user} />
-        <SideNavbar />
+        <SideNavbar loggedInUser={user} />
         <main>
           <Routes>
-            {
-              routesList.map((route) => (
-                <Route
-                  key={route.path}
-                  path={route.path}
-                  element={
-                    route.requiresAuth ? (
-                      <ProtectedRoute>
-                        { route.element }
-                      </ProtectedRoute>
-                    ) : (
-                      <PublicRoute>
-                        { route.element }
-                      </PublicRoute>
-                    )
-                  }
-                />
-              ))
-            }
+            { getRoutes(routesList) }
           </Routes>
         </main>
       </Router>

@@ -14,8 +14,11 @@ const routes = {
   getDashboard: () => {
     return '/dashboard'
   },
+  getDiaries: () => {
+    return '/diaries'
+  },
   getDiary: (slug: string) => {
-    return `/diary/${slug}`
+    return `/diaries/${slug}`
   }
 }
 

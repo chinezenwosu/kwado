@@ -1,15 +1,26 @@
 .card {
-  background: #fbfbfb;
+  background: #f6f6f6;
   border-radius: 6px;
+  border: none;
   color: black;
+  cursor: pointer;
   display: block;
+  font-family: inherit;
   margin: 20px 0;
+  opacity: 0.5;
   padding: 35px 18px;
+  text-align: unset;
   text-decoration: none;
+  width: 100%;
+}
+
+.card.active {
+  opacity: 1;
 }
 
 .title {
-  font-size: 1rem;
+  font-size: 0.825rem;
+  letter-spacing: 0.7px;
   margin: 0;
 }
 
