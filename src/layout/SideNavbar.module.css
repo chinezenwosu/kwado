@@ -22,6 +22,7 @@
 }
 
 .sideNavCheckbox ~ main {
+  transition: margin-left 0.5s;
   margin-left: var(--side-nav-width);
   width: calc(100% - var(--side-nav-width));
 }
