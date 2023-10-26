@@ -1,6 +1,6 @@
 .sideNav {
   height: 100%;
-  width: 0;
+  width: var(--side-nav-width);
   position: fixed;
   z-index: 1;
   top: 0;
@@ -10,7 +10,7 @@
   padding-top: 60px;
   transition: 0.5s;
   /* background: #FFA41C; */
-  background: #FBC87C;
+  background: #f9f9f9;
 }
 
 .sideNav a:hover {
@@ -21,28 +21,23 @@
   display: none;
 }
 
-.sideNavCheckbox ~ .sideNav {
-  width: 61px;
-}
-
 .sideNavCheckbox ~ main {
-  margin-left: 61px;
+  margin-left: var(--side-nav-width);
+  width: calc(100% - var(--side-nav-width));
 }
 
 .sideNavCheckbox:checked ~ .sideNav {
-  width: 250px;
+  width: var(--side-nav-collapsed-width);
+  background: #fbc87c;
 }
 
 .sideNavCheckbox:checked ~ main {
-  margin-left: 250px;
+  margin-left: var(--side-nav-collapsed-width);
+  width: calc(100% - var(--side-nav-collapsed-width));
 }
 
 .sideNavCheckbox:checked ~ .sideNav .sideMenuLabel {
-  opacity: 1;
-}
-
-.sideNavCheckbox:checked ~ .sideNav {
-  background-color: #f9f9f9;
+  opacity: 0;
 }
 
 .sideNavTrigger {
@@ -77,7 +72,7 @@
 .sideMenuLabel {
   font-size: 0.925rem;
   transition: opacity 0.5s;
-  opacity: 0;
+  opacity: 1;
 }
 
 .sideNavLinks {

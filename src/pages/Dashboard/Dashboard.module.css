@@ -1,29 +1,28 @@
 .dashboard {
+  --submenu-width: 450px;
   display: flex;
   flex-direction: row;
 }
 
 .dashboard > * {
   min-height: 100vh;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .container { 
-  padding: 20px 15px 15px 15px;
-  width: 100%;
+  padding: 20px 20px 15px 20px;
+  width: calc(100vw - var(--submenu-width) - var(--side-nav-width));
   height: 100vh;
 }
 
 .diaryListContainer {
-  width: 450px;
+  width: var(--submenu-width);
   border-right: 1px solid #ececec;
-  overflow-y: scroll;
 }
 
+.container::-webkit-scrollbar,
 .diaryListContainer::-webkit-scrollbar {
   display: none;
-}
-
-.diaryListContainer {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
