@@ -5,6 +5,7 @@ import Toolbar from './components/Toolbar'
 import TextEditor from './components/TextEditor'
 import socketConnection, { EditorSocket } from '../../lib/socketConnection'
 import 'react-quill/dist/quill.snow.css'
+import styles from './Diary.module.css'
 
 const fetchState = {
   LOADING: 0,
@@ -37,8 +38,6 @@ const Diary = () => {
   useEffect(() => {
     if (socket === null) return
     
-    socket.emit(socketConnection.editorEmissions.GET_DOCUMENT, slug)
-
     socket.on(socketConnection.editorEmissions.LOAD_DOCUMENT, (data) => {
       if (!data) {
         if (fetchStatusRef.current === fetchState.EXISTS) {
@@ -55,6 +54,12 @@ const Diary = () => {
     })
   }, [socket])
 
+  useEffect(() => {
+    if (socket === null) return
+    
+    socket.emit(socketConnection.editorEmissions.GET_DOCUMENT, slug)
+  }, [socket, slug])
+
   if (fetchStatus === fetchState.MISSING) {
     return <h4>Document does not exist</h4>
   }
@@ -68,13 +73,13 @@ const Diary = () => {
   }
 
   return (
-    <>
+    <div className={styles.diaryContainer}>
       <Toolbar />
       <TextEditor
         socket={socket}
         document={document}
       />
-    </>
+    </div>
   )
 }
 
