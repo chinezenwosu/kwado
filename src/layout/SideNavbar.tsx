@@ -16,7 +16,8 @@ const SideNavbar = ({ loggedInUser }: { loggedInUser: User | null }) => {
       Icon: GridView,
     },
     {
-      path: routes.getDiary(':slug'),
+      path: routes.getDiaries(),
+      match: routes.getDiary('*'),
       label: 'Diaries',
       Icon: SubjectRounded,
     },
@@ -33,7 +34,7 @@ const SideNavbar = ({ loggedInUser }: { loggedInUser: User | null }) => {
         {
           navLinks.map((item) => {
             let linkClass = styles.sideMenuLink
-            const match = useMatch(item.path)
+            const match = useMatch(item.match || item.path)
 
             if (match?.pathname === location.pathname) {
               linkClass += ` ${styles.active}`
