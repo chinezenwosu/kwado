@@ -4,15 +4,16 @@
   --bg-default: #f9fbfd;
   --bg-nav: rgba(14, 35, 80, 0.9);
   --primary: #1180af;
-  --font-family-default: 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;
-  --font-family-editor: Arial, Helvetica, sans-serif;
+  --font-family-generic: Arial, Helvetica, sans-serif;
+  --font-family-primary: Cabin, 'Lucida Sans Unicode', serif;
+  --font-family-secondary: Raleway, 'Lucida Grande', var(--font-family-generic);
   --side-nav-width: 250px;
   --side-nav-collapsed-width: 61px;
 }
 
 html, body {
   color: #333333;
-  font-family: var(--font-family-default);
+  font-family: var(--font-family-primary);
   font-size: 1em;
   margin: 0;
   padding: 0;
