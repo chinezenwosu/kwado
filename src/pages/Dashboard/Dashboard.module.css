@@ -17,12 +17,6 @@
   height: 100vh;
 }
 
-.diaryListContainer {
-  width: var(--submenu-width);
-  border-right: 1px solid #ececec;
-}
-
-.container::-webkit-scrollbar,
-.diaryListContainer::-webkit-scrollbar {
+.container::-webkit-scrollbar {
   display: none;
 }
