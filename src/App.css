@@ -1,6 +1,5 @@
 main {
   margin-top: 60px;
-  transition: margin-left 0.5s;
   overflow: hidden;
   width: 100%;
 }
@@ -8,7 +7,7 @@ main {
 .ql-container.ql-snow,
 .ql-toolbar.ql-snow {
   border: none !important;
-  font-family: Helvetica !important;
+  font-size: 0.925em;
 }
 
 .ql-snow.ql-toolbar button,
@@ -72,6 +71,11 @@ main {
 
 .ql-editor {
   height: 100vh !important;
+  padding: 0;
+}
+
+.ql-editor > * {
+  margin: revert !important;
 }
 
 .ql-editor[contenteditable="false"],
