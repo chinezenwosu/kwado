@@ -44,9 +44,11 @@ const Navbar = ({ loggedInUser }: { loggedInUser: User | null }) => {
             <a href={routes.getHome()}>
               <img src={Logo} className={styles.logo} />
             </a>
-            <label className={sideNavStyles.sideNavTrigger} htmlFor={sideNavToggleId}>
-              <MenuRounded />
-            </label>
+            {loggedInUser && (
+              <label className={sideNavStyles.sideNavTrigger} htmlFor={sideNavToggleId}>
+                <MenuRounded />
+              </label>
+            )}
           </div>
           <label htmlFor={mobileNavToggleId}>
             <div className={styles.toggleIcon}>
@@ -65,11 +67,13 @@ const Navbar = ({ loggedInUser }: { loggedInUser: User | null }) => {
           }
         </ul>
       </nav>
-      <input
-        id={sideNavToggleId}
-        className={sideNavStyles.sideNavCheckbox}
-        type="checkbox"
-      />
+      {loggedInUser && (
+        <input
+          id={sideNavToggleId}
+          className={sideNavStyles.sideNavCheckbox}
+          type="checkbox"
+        />
+      )}
     </>
   )
 }
