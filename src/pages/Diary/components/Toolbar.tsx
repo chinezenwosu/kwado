@@ -1,4 +1,4 @@
-import { Key } from 'react'
+import React, { Key } from 'react'
 import { Quill } from 'react-quill'
 import { Select } from '../../../components/Input'
 import { formatString } from '../../../utils'
@@ -118,44 +118,46 @@ const customTools = {
 }
 
 const Toolbar = () => (
-  <div id={TOOLBAR_ID} className={styles.toolbar}>
-    {
-      formatOptions.map((buttons) => {
-        return (
-          buttons.map((button: ButtonOption, index: Key) => {
-            let tool = (
-              <button
-                className={`ql-${button.name}`}
-                value={button.value}
-              />
-            )
-
-            if (button.custom) {
-              tool = customTools[button.name as keyof typeof customTools]
-            }
-
-            if (button.options) {
-              tool = (
-                <Select
+  <div className={styles.toolbarContainer}>
+    <div id={TOOLBAR_ID} className={styles.toolbar}>
+      {
+        formatOptions.map((buttons) => {
+          return (
+            buttons.map((button: ButtonOption, index: Key) => {
+              let tool = (
+                <button
                   className={`ql-${button.name}`}
-                  defaultValue={button.value || ''}
-                  options={button.options}
+                  value={button.value}
                 />
               )
-            }
 
-            return (
-              <span
-                key={index}
-                className={`${styles.toolContainer} ${index === 0 ? styles.toolDivider : ''}`}
-              >
-                { tool }
-              </span>
-            )
-          })
-        )
-      })
-    }
+              if (button.custom) {
+                tool = customTools[button.name as keyof typeof customTools]
+              }
+
+              if (button.options) {
+                tool = (
+                  <Select
+                    className={`ql-${button.name}`}
+                    defaultValue={button.value || ''}
+                    options={button.options}
+                  />
+                )
+              }
+
+              return (
+                <span
+                  key={index}
+                  className={`${styles.toolContainer} ${index === 0 ? styles.toolDivider : ''}`}
+                >
+                  { tool }
+                </span>
+              )
+            })
+          )
+        })
+      }
+    </div>
   </div>
 )
 
