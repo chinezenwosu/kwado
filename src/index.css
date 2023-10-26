@@ -6,6 +6,8 @@
   --primary: #1180af;
   --font-family-default: 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;
   --font-family-editor: Arial, Helvetica, sans-serif;
+  --side-nav-width: 250px;
+  --side-nav-collapsed-width: 61px;
 }
 
 html, body {
