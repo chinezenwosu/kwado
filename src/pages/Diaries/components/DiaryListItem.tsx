@@ -1,7 +1,7 @@
 import className from 'classnames'
 import { formatDate } from '../../../utils'
 import { Diary } from '../../../types/Diary'
-import styles from './DiaryListitem.module.css'
+import styles from './DiaryListItem.module.css'
 
 const DiaryListItem = ({
   diary,
