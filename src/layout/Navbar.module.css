@@ -2,14 +2,14 @@
 	background-color: var(--bg-nav);
 	color: var(--white);
 	padding: 20px;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
 }
 
 .logo {
-  height: 20px;
+	height: 20px;
 	vertical-align: bottom;
 }
 
@@ -23,9 +23,9 @@
 
 .navLinks {
 	display: none;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
 .navLink,
@@ -36,7 +36,7 @@
 	cursor: pointer;
 	padding: 0;
 	text-decoration: none;
-  font-size: 0.875rem;
+	font-size: 0.875rem;
 }
 
 .nav label {
@@ -49,10 +49,10 @@
 }
 
 .toggleIcon div {
-  height: 2px;
-  background: var(--white);
-  margin: 4px 0;
-  border-radius: 4px;
+	height: 2px;
+	background: var(--white);
+	margin: 4px 0;
+	border-radius: 4px;
 }
 
 .navHead {
@@ -78,11 +78,11 @@
 }
 
 @media only screen and (min-width: 992px) {
-  .nav {
+	.nav {
 		display: flex;
-    height: auto;
+		height: auto;
 		justify-content: space-between;
-    margin-bottom: 30px;
+		margin-bottom: 30px;
 	}
 
 	.toggleIcon {
@@ -97,9 +97,9 @@
 	.navLinks li:nth-child(1) {
 		padding-top: 0;
 	}
-	
+
 	.menuToggle:not(:checked) + .navLinks {
-	  display: block;
+		display: block;
 	}
 
 	.logoContainer {

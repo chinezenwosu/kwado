@@ -1,16 +1,16 @@
 .button {
-  align-items: center;
-  background: #ececec;
-  border-radius: 6px;
-  border: 2px solid #ececec;
-  color: var(--black);
-  display: flex;
-  gap: 5px;
-  padding: 10px 15px 10px 13px;
-  width: 100%;
-  border-bottom: 1px solid transparent;
+	align-items: center;
+	background: #ececec;
+	border-radius: 6px;
+	border: 2px solid #ececec;
+	color: var(--black);
+	display: flex;
+	gap: 5px;
+	padding: 10px 15px 10px 13px;
+	width: 100%;
+	border-bottom: 1px solid transparent;
 }
 
 .button:hover {
-  border-bottom: 1px solid #dcdcdc;
+	border-bottom: 1px solid #dcdcdc;
 }

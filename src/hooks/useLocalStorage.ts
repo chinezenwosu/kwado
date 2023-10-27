@@ -1,57 +1,57 @@
 const ONE_HOUR = 1000 * 60 * 60
 
 export const useLocalStorage = () => {
-  const setItem = (key: string, val: string) => {
-    localStorage.setItem(key, val)
-  }
+	const setItem = (key: string, val: string) => {
+		localStorage.setItem(key, val)
+	}
 
-  const getItem = (key: string) => {
-    const item = localStorage.getItem(key)
+	const getItem = (key: string) => {
+		const item = localStorage.getItem(key)
 
-    if (item && item !== 'undefined') {
-      return item
-    }
+		if (item && item !== 'undefined') {
+			return item
+		}
 
-    return null
-  }
+		return null
+	}
 
-  const setItemWithExpiry = (key: string, val: Object, ttl = ONE_HOUR) => {
-    const item = {
-      value: val,
-      expiry: Date.now() + ttl,
-    }
-    const valueString = JSON.stringify(item)
-    
-    setItem(key, valueString)
-  }
+	const setItemWithExpiry = (key: string, val: Object, ttl = ONE_HOUR) => {
+		const item = {
+			value: val,
+			expiry: Date.now() + ttl,
+		}
+		const valueString = JSON.stringify(item)
 
-  const getItemWithExpiry = (key: string) => {
-    const item = getItem(key)
+		setItem(key, valueString)
+	}
 
-    if (!item) {
-      return null
-    }
+	const getItemWithExpiry = (key: string) => {
+		const item = getItem(key)
 
-    const itemObject = JSON.parse(item)
-    // compare the expiry time of the item with the current time
-    if (Date.now() > itemObject.expiry) {
-      removeItem(key)
-      return null
-    }
+		if (!item) {
+			return null
+		}
 
-    const valueString = JSON.stringify(itemObject.value)
-    return valueString || null
-  }
+		const itemObject = JSON.parse(item)
+		// compare the expiry time of the item with the current time
+		if (Date.now() > itemObject.expiry) {
+			removeItem(key)
+			return null
+		}
 
-  const removeItem = (key: string) => {
-    localStorage.removeItem(key)
-  }
+		const valueString = JSON.stringify(itemObject.value)
+		return valueString || null
+	}
 
-  return {
-    setItem,
-    getItem,
-    setItemWithExpiry,
-    getItemWithExpiry,
-    removeItem,
-  }
+	const removeItem = (key: string) => {
+		localStorage.removeItem(key)
+	}
+
+	return {
+		setItem,
+		getItem,
+		setItemWithExpiry,
+		getItemWithExpiry,
+		removeItem,
+	}
 }

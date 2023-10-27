@@ -2,27 +2,23 @@ import { useEffect } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 
 const Login = () => {
-  const { logout } = useAuth()
-  
-  const handleLogout = async () => {
-    const { error } = await logout()
+	const { logout } = useAuth()
 
-    if (error) {
-      console.log('Logout error', error)
-    } else {
-      window.location.reload()
-    }
-  }
+	const handleLogout = async () => {
+		const { error } = await logout()
 
-  useEffect(() => {
-    handleLogout()
-  }, [])
+		if (error) {
+			console.log('Logout error', error)
+		} else {
+			window.location.reload()
+		}
+	}
 
-  return (
-    <div>
-      Logging out
-    </div>
-  )
+	useEffect(() => {
+		handleLogout()
+	}, [])
+
+	return <div>Logging out</div>
 }
 
 export default Login

@@ -1,47 +1,50 @@
 :root {
-  --black: #000000;
-  --white: #ffffff;
-  --bg-default: #f9fbfd;
-  --bg-nav: rgba(14, 35, 80, 0.9);
-  --primary: #1180af;
-  --font-family-generic: Arial, Helvetica, sans-serif;
-  --font-family-primary: Cabin, 'Lucida Sans Unicode', serif;
-  --font-family-secondary: Raleway, 'Lucida Grande', var(--font-family-generic);
-  --side-nav-width: 250px;
-  --side-nav-collapsed-width: 61px;
+	--black: #000000;
+	--white: #ffffff;
+	--bg-default: #f9fbfd;
+	--bg-nav: rgba(14, 35, 80, 0.9);
+	--primary: #1180af;
+	--font-family-generic: Arial, Helvetica, sans-serif;
+	--font-family-primary: Cabin, 'Lucida Sans Unicode', serif;
+	--font-family-secondary: Raleway, 'Lucida Grande', var(--font-family-generic);
+	--side-nav-width: 250px;
+	--side-nav-collapsed-width: 61px;
 }
 
-html, body {
-  color: #333333;
-  font-family: var(--font-family-primary);
-  font-size: 1em;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html,
+body {
+	color: #333333;
+	font-family: var(--font-family-primary);
+	font-size: 1em;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	margin: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
-*, *::after, *::before {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+*,
+*::after,
+*::before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-.clearfix, 
-.clearfix::after, 
+.clearfix,
+.clearfix::after,
 .clearfix::before {
-  content: "";
-  display: block;
-  clear: both;
+	content: '';
+	display: block;
+	clear: both;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
 }
 
 * {
-  outline: none;
+	outline: none;
 }

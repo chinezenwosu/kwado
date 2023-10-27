@@ -8,79 +8,80 @@ import 'react-quill/dist/quill.snow.css'
 import styles from './Diary.module.css'
 
 const fetchState = {
-  LOADING: 0,
-  MISSING: 1,
-  EXISTS: 2,
-  REVOKED: 3,
+	LOADING: 0,
+	MISSING: 1,
+	EXISTS: 2,
+	REVOKED: 3,
 }
 
 const Diary = () => {
-  const [socket, setSocket] = useState<EditorSocket | null>(null)
-  const [document, setDocument] = useState<DeltaStatic | null>(null)
-  const [fetchStatus, setFetchStatus]  = useState(fetchState.LOADING)
-  const fetchStatusRef = useRef(fetchStatus)
-  const { slug = '' } = useParams()
+	const [socket, setSocket] = useState<EditorSocket | null>(null)
+	const [document, setDocument] = useState<DeltaStatic | null>(null)
+	const [fetchStatus, setFetchStatus] = useState(fetchState.LOADING)
+	const fetchStatusRef = useRef(fetchStatus)
+	const { slug = '' } = useParams()
 
-  const setFetchStatusAndRef = (state: number) => {
-    setFetchStatus(state)
-    fetchStatusRef.current = state
-  }
+	const setFetchStatusAndRef = (state: number) => {
+		setFetchStatus(state)
+		fetchStatusRef.current = state
+	}
 
-  useEffect(() => {
-    const editorSocket = socketConnection.getSocket()
-    setSocket(editorSocket)
+	useEffect(() => {
+		const editorSocket = socketConnection.getSocket()
+		setSocket(editorSocket)
 
-    return () => {
-      editorSocket.disconnect()
-    }
-  }, [])
+		return () => {
+			editorSocket.disconnect()
+		}
+	}, [])
 
-  useEffect(() => {
-    if (socket === null) return
-    
-    socket.on(socketConnection.editorEmissions.LOAD_DOCUMENT, (data) => {
-      if (!data) {
-        if (fetchStatusRef.current === fetchState.EXISTS) {
-          setFetchStatusAndRef(fetchState.REVOKED)
-        } else {
-          setFetchStatusAndRef(fetchState.MISSING)
-        }
+	useEffect(() => {
+		if (socket === null) return
 
-        return
-      }
+		socket.on(socketConnection.editorEmissions.LOAD_DOCUMENT, (data) => {
+			if (!data) {
+				if (fetchStatusRef.current === fetchState.EXISTS) {
+					setFetchStatusAndRef(fetchState.REVOKED)
+				} else {
+					setFetchStatusAndRef(fetchState.MISSING)
+				}
 
-      setFetchStatusAndRef(fetchState.EXISTS)
-      setDocument(data)
-    })
-  }, [socket])
+				return
+			}
 
-  useEffect(() => {
-    if (socket === null) return
-    
-    socket.emit(socketConnection.editorEmissions.GET_DOCUMENT, slug)
-  }, [socket, slug])
+			setFetchStatusAndRef(fetchState.EXISTS)
+			setDocument(data)
+		})
+	}, [socket])
 
-  if (fetchStatus === fetchState.MISSING) {
-    return <h4>Document does not exist</h4>
-  }
+	useEffect(() => {
+		if (socket === null) return
 
-  if (fetchStatus === fetchState.REVOKED) {
-    return <h4>You no longer have access to this kwadoc</h4>
-  }
+		socket.emit(socketConnection.editorEmissions.GET_DOCUMENT, slug)
+	}, [socket, slug])
 
-  if (socket === null || fetchStatus === fetchState.LOADING || document === null) {
-    return null
-  }
+	if (fetchStatus === fetchState.MISSING) {
+		return <h4>Document does not exist</h4>
+	}
 
-  return (
-    <div className={styles.diaryContainer}>
-      <Toolbar />
-      <TextEditor
-        socket={socket}
-        document={document}
-      />
-    </div>
-  )
+	if (fetchStatus === fetchState.REVOKED) {
+		return <h4>You no longer have access to this kwadoc</h4>
+	}
+
+	if (
+		socket === null ||
+		fetchStatus === fetchState.LOADING ||
+		document === null
+	) {
+		return null
+	}
+
+	return (
+		<div className={styles.diaryContainer}>
+			<Toolbar />
+			<TextEditor socket={socket} document={document} />
+		</div>
+	)
 }
 
 export default Diary

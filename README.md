@@ -21,4 +21,3 @@ Run the following command to build the app for production to the `dist` folder.
 ```
 npm run build
 ```
-

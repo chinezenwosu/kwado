@@ -1,8 +1,8 @@
 .editor {
-  background-color: var(--white);
-  margin: auto;
-  padding: 0;
-  position: relative;
-  width: 100%;
-  height: calc(var(--editorWidth) * var(--editorRatio));
+	background-color: var(--white);
+	margin: auto;
+	padding: 0;
+	position: relative;
+	width: 100%;
+	height: calc(var(--editorWidth) * var(--editorRatio));
 }

@@ -8,31 +8,27 @@ import styles from './CreateDiary.module.css'
 import { Diary } from '../../../types/Diary'
 
 const CreateDiary = ({
-  addDiaryToList
+	addDiaryToList,
 }: {
-  addDiaryToList: (diary: Diary) => void
+	addDiaryToList: (diary: Diary) => void
 }) => {
-  const navigate = useNavigate()
+	const navigate = useNavigate()
 
-  const handleCreateDiary = async () => {
-    const response = await createDiary()
+	const handleCreateDiary = async () => {
+		const response = await createDiary()
 
-    if (response.data) {
-      addDiaryToList(response.data)
-      navigate(routes.getDiary(response.data.slug))
-    }
-  }
+		if (response.data) {
+			addDiaryToList(response.data)
+			navigate(routes.getDiary(response.data.slug))
+		}
+	}
 
-  return (
-    <Button
-      className={styles.button}
-      onClick={handleCreateDiary}
-    >
-      <AddRounded />
-      Create new diary
-    </Button>
-  )
+	return (
+		<Button className={styles.button} onClick={handleCreateDiary}>
+			<AddRounded />
+			Create new diary
+		</Button>
+	)
 }
 
 export default CreateDiary
- 

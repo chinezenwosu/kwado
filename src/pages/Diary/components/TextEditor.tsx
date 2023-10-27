@@ -9,75 +9,92 @@ import 'react-quill/dist/quill.snow.css'
 
 export const defaultEditorValue = {}
 
-const TextEditor = ({ socket, document }: {
-  socket: EditorSocket,
-  document: DeltaStatic,
+const TextEditor = ({
+	socket,
+	document,
+}: {
+	socket: EditorSocket
+	document: DeltaStatic
 }) => {
-  const editorRef = useRef<ReactQuill>(null)
+	const editorRef = useRef<ReactQuill>(null)
 
-  const initializeSelection = (editor: Quill) => {
-    if (!editor.getSelection()) {
-      editor.setSelection(editor.getLength(), 0)
-    }
-  }
+	const initializeSelection = (editor: Quill) => {
+		if (!editor.getSelection()) {
+			editor.setSelection(editor.getLength(), 0)
+		}
+	}
 
-  useEffect(() => {
-    const quill = editorRef.current
+	useEffect(() => {
+		const quill = editorRef.current
 
-    if (quill === null) return
+		if (quill === null) return
 
-    const editor = quill.getEditor()
-    initializeSelection(editor)
+		const editor = quill.getEditor()
+		initializeSelection(editor)
 
-    const contentHandler = (delta: DeltaStatic) => {
-      editor.updateContents(delta)
-    }
+		const contentHandler = (delta: DeltaStatic) => {
+			editor.updateContents(delta)
+		}
 
-    socket.on(socketConnection.editorEmissions.RECEIVE_DOCUMENT_CONTENT_CHANGES, contentHandler)
+		socket.on(
+			socketConnection.editorEmissions.RECEIVE_DOCUMENT_CONTENT_CHANGES,
+			contentHandler,
+		)
 
-    return () => {
-      socket.off(socketConnection.editorEmissions.RECEIVE_DOCUMENT_CONTENT_CHANGES, contentHandler)
-    }
-  }, [editorRef.current])
+		return () => {
+			socket.off(
+				socketConnection.editorEmissions.RECEIVE_DOCUMENT_CONTENT_CHANGES,
+				contentHandler,
+			)
+		}
+	}, [editorRef.current])
 
-  useEffect(() => {
-    if (!editorRef.current) return
+	useEffect(() => {
+		if (!editorRef.current) return
 
-    const editor = editorRef.current.getEditor()
-    editor.setContents(document)
-    editor.enable()
-    editor.setSelection(editor.getLength(), 0)
-  }, [editorRef.current])
+		const editor = editorRef.current.getEditor()
+		editor.setContents(document)
+		editor.enable()
+		editor.setSelection(editor.getLength(), 0)
+	}, [editorRef.current])
 
-  const onChange = (_content: string, delta: DeltaStatic, source: String, editor: ReactQuill.UnprivilegedEditor) => {
-    if (source !== 'user') return
+	const onChange = (
+		_content: string,
+		delta: DeltaStatic,
+		source: string,
+		editor: ReactQuill.UnprivilegedEditor,
+	) => {
+		if (source !== 'user') return
 
-    socket.volatile.emit(socketConnection.editorEmissions.SEND_DOCUMENT_CONTENT_CHANGES, {
-      payload: {
-        delta,
-        data: editor.getContents(),
-      },
-    })
-  }
+		socket.volatile.emit(
+			socketConnection.editorEmissions.SEND_DOCUMENT_CONTENT_CHANGES,
+			{
+				payload: {
+					delta,
+					data: editor.getContents(),
+				},
+			},
+		)
+	}
 
-  const modules = {
-    toolbar: toolbarModules,
-  }
+	const modules = {
+		toolbar: toolbarModules,
+	}
 
-  const Editor = withCursors(ReactQuill)({ socket })
+	const Editor = withCursors(ReactQuill)({ socket })
 
-  return (
-    <Editor
-      ref={editorRef}
-      className={styles.editor}
-      placeholder="Start typing something..."
-      theme="snow"
-      readOnly={document === null}
-      value={document}
-      onChange={onChange}
-      modules={modules}
-    />
-  )
+	return (
+		<Editor
+			ref={editorRef}
+			className={styles.editor}
+			placeholder="Start typing something..."
+			theme="snow"
+			readOnly={document === null}
+			value={document}
+			onChange={onChange}
+			modules={modules}
+		/>
+	)
 }
 
 export default TextEditor
