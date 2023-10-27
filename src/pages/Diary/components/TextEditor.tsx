@@ -9,9 +9,12 @@ import 'react-quill/dist/quill.snow.css'
 
 export const defaultEditorValue = {}
 
-const TextEditor = ({ socket, document }: {
-  socket: EditorSocket,
-  document: DeltaStatic,
+const TextEditor = ({
+  socket,
+  document,
+}: {
+  socket: EditorSocket
+  document: DeltaStatic
 }) => {
   const editorRef = useRef<ReactQuill>(null)
 
@@ -33,10 +36,16 @@ const TextEditor = ({ socket, document }: {
       editor.updateContents(delta)
     }
 
-    socket.on(socketConnection.editorEmissions.RECEIVE_DOCUMENT_CONTENT_CHANGES, contentHandler)
+    socket.on(
+      socketConnection.editorEmissions.RECEIVE_DOCUMENT_CONTENT_CHANGES,
+      contentHandler,
+    )
 
     return () => {
-      socket.off(socketConnection.editorEmissions.RECEIVE_DOCUMENT_CONTENT_CHANGES, contentHandler)
+      socket.off(
+        socketConnection.editorEmissions.RECEIVE_DOCUMENT_CONTENT_CHANGES,
+        contentHandler,
+      )
     }
   }, [editorRef.current])
 
@@ -49,15 +58,23 @@ const TextEditor = ({ socket, document }: {
     editor.setSelection(editor.getLength(), 0)
   }, [editorRef.current])
 
-  const onChange = (_content: string, delta: DeltaStatic, source: String, editor: ReactQuill.UnprivilegedEditor) => {
+  const onChange = (
+    _content: string,
+    delta: DeltaStatic,
+    source: string,
+    editor: ReactQuill.UnprivilegedEditor,
+  ) => {
     if (source !== 'user') return
 
-    socket.volatile.emit(socketConnection.editorEmissions.SEND_DOCUMENT_CONTENT_CHANGES, {
-      payload: {
-        delta,
-        data: editor.getContents(),
+    socket.volatile.emit(
+      socketConnection.editorEmissions.SEND_DOCUMENT_CONTENT_CHANGES,
+      {
+        payload: {
+          delta,
+          data: editor.getContents(),
+        },
       },
-    })
+    )
   }
 
   const modules = {

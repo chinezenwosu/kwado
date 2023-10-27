@@ -33,7 +33,7 @@ const Navbar = ({ loggedInUser }: { loggedInUser: User | null }) => {
         path: routes.getSignup(),
         label: 'Sign up',
       },
-    ]
+    ],
   }
 
   return (
@@ -45,7 +45,10 @@ const Navbar = ({ loggedInUser }: { loggedInUser: User | null }) => {
               <img src={Logo} className={styles.logo} />
             </a>
             {loggedInUser && (
-              <label className={sideNavStyles.sideNavTrigger} htmlFor={sideNavToggleId}>
+              <label
+                className={sideNavStyles.sideNavTrigger}
+                htmlFor={sideNavToggleId}
+              >
                 <MenuRounded />
               </label>
             )}
@@ -56,15 +59,19 @@ const Navbar = ({ loggedInUser }: { loggedInUser: User | null }) => {
             </div>
           </label>
         </div>
-        <input type="checkbox" id={mobileNavToggleId} className={styles.menuToggle} />
+        <input
+          type="checkbox"
+          id={mobileNavToggleId}
+          className={styles.menuToggle}
+        />
         <ul className={styles.navLinks}>
-          {
-            navMap[authStatus].map((item) => (
-              <li key={item.path}>
-                <Link to={item.path} className={styles.navLink}>{item.label}</Link>
-              </li>
-            ))
-          }
+          {navMap[authStatus].map((item) => (
+            <li key={item.path}>
+              <Link to={item.path} className={styles.navLink}>
+                {item.label}
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
       {loggedInUser && (

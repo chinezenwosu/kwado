@@ -1,7 +1,7 @@
 import fetch, { Response } from '../lib/fetch'
 
-const createDiary = async() => {
-  let response: Response = {}
+const createDiary = async () => {
+  const response: Response = {}
   const defaultEditorValue = {}
   const defaultHtmlValue = '<p></p>'
 
@@ -15,22 +15,20 @@ const createDiary = async() => {
     response.data = documentRes.data
 
     return response
-  }
-  catch(e) {
+  } catch (e) {
     return { error: e }
   }
 }
 
-const getDiaries = async() => {
-  let response: Response = {}
+const getDiaries = async () => {
+  const response: Response = {}
 
   try {
     const documentRes = await fetch.get('kwadocs')
 
     response.data = documentRes.data
     return response
-  }
-  catch(e) {
+  } catch (e) {
     return { error: e }
   }
 }

@@ -17,7 +17,7 @@ const fetchState = {
 const Diary = () => {
   const [socket, setSocket] = useState<EditorSocket | null>(null)
   const [document, setDocument] = useState<DeltaStatic | null>(null)
-  const [fetchStatus, setFetchStatus]  = useState(fetchState.LOADING)
+  const [fetchStatus, setFetchStatus] = useState(fetchState.LOADING)
   const fetchStatusRef = useRef(fetchStatus)
   const { slug = '' } = useParams()
 
@@ -37,7 +37,7 @@ const Diary = () => {
 
   useEffect(() => {
     if (socket === null) return
-    
+
     socket.on(socketConnection.editorEmissions.LOAD_DOCUMENT, (data) => {
       if (!data) {
         if (fetchStatusRef.current === fetchState.EXISTS) {
@@ -56,7 +56,7 @@ const Diary = () => {
 
   useEffect(() => {
     if (socket === null) return
-    
+
     socket.emit(socketConnection.editorEmissions.GET_DOCUMENT, slug)
   }, [socket, slug])
 
@@ -68,17 +68,18 @@ const Diary = () => {
     return <h4>You no longer have access to this kwadoc</h4>
   }
 
-  if (socket === null || fetchStatus === fetchState.LOADING || document === null) {
+  if (
+    socket === null ||
+    fetchStatus === fetchState.LOADING ||
+    document === null
+  ) {
     return null
   }
 
   return (
     <div className={styles.diaryContainer}>
       <Toolbar />
-      <TextEditor
-        socket={socket}
-        document={document}
-      />
+      <TextEditor socket={socket} document={document} />
     </div>
   )
 }

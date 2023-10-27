@@ -11,7 +11,7 @@
   scrollbar-width: none;
 }
 
-.container { 
+.container {
   padding: 20px 20px 15px 20px;
   width: calc(100vw - var(--submenu-width) - var(--side-nav-width));
   height: 100vh;

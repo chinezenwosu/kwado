@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 
 // TODO: add form verification
 interface SignupFormProps {
-  error: string,
+  error: string
   handleSignup: ({
     firstName,
     lastName,
     email,
     password,
   }: {
-    firstName: string,
-    lastName: string,
-    email: string,
+    firstName: string
+    lastName: string
+    email: string
     password: string
   }) => void
 }
@@ -22,7 +22,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ handleSignup, error }) => {
     firstName: '',
     lastName: '',
     email: '',
-    password: ''
+    password: '',
   })
   const { firstName, lastName, email, password } = formData
 
@@ -46,19 +46,39 @@ const SignupForm: React.FC<SignupFormProps> = ({ handleSignup, error }) => {
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="firstName">First Name:</label>
-      <input type="text" name="firstName" value={formData.firstName} onChange={handleChange}/>
+      <input
+        type="text"
+        name="firstName"
+        value={formData.firstName}
+        onChange={handleChange}
+      />
 
       <label htmlFor="lastName">Last Name:</label>
-      <input type="text" name="lastName" value={formData.lastName} onChange={handleChange}/>
+      <input
+        type="text"
+        name="lastName"
+        value={formData.lastName}
+        onChange={handleChange}
+      />
 
       <label htmlFor="email">Email:</label>
-      <input type="email" name="email" value={formData.email} onChange={handleChange}/>
+      <input
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+      />
 
       <label htmlFor="password">Password:</label>
-      <input type="password" name="password" value={formData.password} onChange={handleChange}/>
+      <input
+        type="password"
+        name="password"
+        value={formData.password}
+        onChange={handleChange}
+      />
 
       <button type="submit">Submit</button>
-      <p>{ error }</p>
+      <p>{error}</p>
     </form>
   )
 }

@@ -7,7 +7,7 @@ const config = {
   },
   fetch: {
     clientHeader: env.VITE_API_CLIENT_HEADER as string,
-  }
+  },
 }
 
 export default config

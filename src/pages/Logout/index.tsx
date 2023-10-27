@@ -3,7 +3,7 @@ import { useAuth } from '../../hooks/useAuth'
 
 const Login = () => {
   const { logout } = useAuth()
-  
+
   const handleLogout = async () => {
     const { error } = await logout()
 
@@ -18,11 +18,7 @@ const Login = () => {
     handleLogout()
   }, [])
 
-  return (
-    <div>
-      Logging out
-    </div>
-  )
+  return <div>Logging out</div>
 }
 
 export default Login

@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 
 interface LoginFormProps {
-  error: string,
+  error: string
   handleLogin: ({
     email,
     password,
   }: {
-    email: string,
+    email: string
     password: string
   }) => void
 }
@@ -49,13 +49,23 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleLogin, error }) => {
     <>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email:</label>
-        <input type="email" name="email" value={formData.email} onChange={handleChange}/>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
 
         <label htmlFor="password">Password:</label>
-        <input type="password" name="password" value={formData.password} onChange={handleChange}/>
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
 
         <button type="submit">Submit</button>
-        <p>{ error }</p>
+        <p>{error}</p>
       </form>
       <button onClick={onClick}>Test login</button>
     </>

@@ -1,15 +1,15 @@
 import moment from 'moment'
 
 moment.updateLocale('en', {
-  calendar : {
-    lastDay : '[Yesterday at] LT',
-    sameDay : '[Today at] LT',
-    nextDay : '[Tomorrow at] LT',
-    lastWeek : '[last] dddd [at] LT',
-    nextWeek : 'dddd [at] LT',
-    sameElse : 'L'
+  calendar: {
+    lastDay: '[Yesterday at] LT',
+    sameDay: '[Today at] LT',
+    nextDay: '[Tomorrow at] LT',
+    lastWeek: '[last] dddd [at] LT',
+    nextWeek: 'dddd [at] LT',
+    sameElse: 'L',
   },
-  relativeTime : {
+  relativeTime: {
     past: '%s ago',
     s: 'a few seconds',
     ss: '%d seconds',
@@ -24,7 +24,7 @@ moment.updateLocale('en', {
     M: 'a month',
     MM: '%d months',
     y: 'a year',
-    yy: '%d years'
+    yy: '%d years',
   },
 })
 

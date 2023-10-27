@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { BrowserRouter as Router,
+import {
+  BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
@@ -80,9 +81,11 @@ const App = () => {
     const location = useLocation()
 
     if (!user) {
-      return <Navigate to={routes.getLogin()} replace state={{ from: location }} />
+      return (
+        <Navigate to={routes.getLogin()} replace state={{ from: location }} />
+      )
     }
-  
+
     return children
   }
 
@@ -90,9 +93,15 @@ const App = () => {
     const location = useLocation()
 
     if (user) {
-      return <Navigate to={routes.getDashboard()} replace state={{ from: location }} />
+      return (
+        <Navigate
+          to={routes.getDashboard()}
+          replace
+          state={{ from: location }}
+        />
+      )
     }
-  
+
     return children
   }
 
@@ -103,17 +112,13 @@ const App = () => {
         path={route.path}
         element={
           route.requiresAuth ? (
-            <ProtectedRoute>
-              { route.element }
-            </ProtectedRoute>
+            <ProtectedRoute>{route.element}</ProtectedRoute>
           ) : (
-            <PublicRoute>
-              { route.element }
-            </PublicRoute>
+            <PublicRoute>{route.element}</PublicRoute>
           )
         }
       >
-        { getRoutes(route.children) }
+        {getRoutes(route.children)}
       </Route>
     ))
   }
@@ -124,9 +129,7 @@ const App = () => {
         <Navbar loggedInUser={user} />
         <SideNavbar loggedInUser={user} />
         <main>
-          <Routes>
-            { getRoutes(routesList) }
-          </Routes>
+          <Routes>{getRoutes(routesList)}</Routes>
         </main>
       </Router>
     </AuthContext.Provider>

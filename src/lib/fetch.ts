@@ -2,8 +2,8 @@ import axios from 'axios'
 import { config } from '../utils'
 
 export type Response = {
-  data?: any,
-  error?: any,
+  data?: unknown
+  error?: unknown
 }
 
 const instance = axios.create({

@@ -1,8 +1,8 @@
 import fetch, { Response } from '../lib/fetch'
 import { LoggedInUser, SignedUpUser } from '../types/User'
 
-const login = async(data: LoggedInUser) => {
-  let response: Response = {}
+const login = async (data: LoggedInUser) => {
+  const response: Response = {}
   const { email, password } = data
 
   try {
@@ -13,28 +13,26 @@ const login = async(data: LoggedInUser) => {
 
     response.data = loginRes.data
     return response
-  }
-  catch(e) {
+  } catch (e) {
     return { error: e }
   }
 }
 
-const loginWithSession = async() => {
-  let response: Response = {}
+const loginWithSession = async () => {
+  const response: Response = {}
 
   try {
     const loginRes = await fetch.get('users/session')
 
     response.data = loginRes.data
     return response
-  }
-  catch(e) {
+  } catch (e) {
     return { error: e }
   }
 }
 
-const signup = async(data: SignedUpUser) => {
-  let response: Response = {}
+const signup = async (data: SignedUpUser) => {
+  const response: Response = {}
   const { firstName, lastName, email, password } = data
 
   try {
@@ -47,22 +45,20 @@ const signup = async(data: SignedUpUser) => {
 
     response.data = signupRes.data
     return response
-  }
-  catch(e) {
+  } catch (e) {
     return { error: e }
   }
 }
 
-const logout = async() => {
-  let response: Response = {}
+const logout = async () => {
+  const response: Response = {}
 
   try {
     const logoutRes = await fetch.post('users/logout')
 
     response.data = logoutRes.data
     return response
-  }
-  catch(e) {
+  } catch (e) {
     return { error: e }
   }
 }

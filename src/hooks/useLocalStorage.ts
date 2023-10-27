@@ -15,13 +15,13 @@ export const useLocalStorage = () => {
     return null
   }
 
-  const setItemWithExpiry = (key: string, val: Object, ttl = ONE_HOUR) => {
+  const setItemWithExpiry = (key: string, val: object, ttl = ONE_HOUR) => {
     const item = {
       value: val,
       expiry: Date.now() + ttl,
     }
     const valueString = JSON.stringify(item)
-    
+
     setItem(key, valueString)
   }
 

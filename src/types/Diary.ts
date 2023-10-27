@@ -2,7 +2,7 @@ import { User } from './User'
 
 export interface Diary {
   slug: string
-  content: Object
+  content: object
   author: User
   html: string
   createdAt: string

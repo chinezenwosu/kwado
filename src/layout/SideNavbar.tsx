@@ -31,27 +31,25 @@ const SideNavbar = ({ loggedInUser }: { loggedInUser: User | null }) => {
   return (
     <div className={styles.sideNav}>
       <ul className={styles.sideNavLinks}>
-        {
-          navLinks.map((item) => {
-            let linkClass = styles.sideMenuLink
-            const match = useMatch(item.match || item.path)
+        {navLinks.map((item) => {
+          let linkClass = styles.sideMenuLink
+          const match = useMatch(item.match || item.path)
 
-            if (match?.pathname === location.pathname) {
-              linkClass += ` ${styles.active}`
-            }
+          if (match?.pathname === location.pathname) {
+            linkClass += ` ${styles.active}`
+          }
 
-            return (
-              <li key={item.path}>
-                <Link to={item.path} className={linkClass}>
-                  <span className={styles.sideMenuIcon}>
-                    <item.Icon />
-                  </span>
-                  <span className={styles.sideMenuLabel}>{item.label}</span>
-                </Link>
-              </li>
-            )
-          })
-        }
+          return (
+            <li key={item.path}>
+              <Link to={item.path} className={linkClass}>
+                <span className={styles.sideMenuIcon}>
+                  <item.Icon />
+                </span>
+                <span className={styles.sideMenuLabel}>{item.label}</span>
+              </Link>
+            </li>
+          )
+        })}
       </ul>
     </div>
   )

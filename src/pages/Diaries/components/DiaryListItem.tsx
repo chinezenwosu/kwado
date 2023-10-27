@@ -1,4 +1,3 @@
-import React from 'react'
 import className from 'classnames'
 import { formatDate } from '../../../utils'
 import { Diary } from '../../../types/Diary'
@@ -13,7 +12,7 @@ const DiaryListItem = ({
   isCurrent: boolean
   setCurrentDiary: (diary: Diary) => void
 }) => {
-  let diaryText = diary.html.replace( /(<([^>]+)>)/ig, ' ')
+  let diaryText = diary.html.replace(/(<([^>]+)>)/gi, ' ')
   const diaryTextIsEmpty = !diaryText.trim()
 
   if (diaryTextIsEmpty) {
@@ -26,17 +25,17 @@ const DiaryListItem = ({
       onClick={() => setCurrentDiary(diary)}
     >
       <h5 className={styles.title}>
-        Diary entry from { formatDate.fromNow(diary.createdAt) }
+        Diary entry from {formatDate.fromNow(diary.createdAt)}
       </h5>
       <p className={styles.content}>
         <span
           className={className({ [styles.emptyDiaryText]: diaryTextIsEmpty })}
         >
-          { diaryText }
+          {diaryText}
         </span>
       </p>
       <p className={styles.updateTime}>
-        Updated { formatDate.fromNow(diary.updatedAt) }
+        Updated {formatDate.fromNow(diary.updatedAt)}
       </p>
     </button>
   )

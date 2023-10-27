@@ -87,15 +87,15 @@
 }
 
 .sideNavLink {
-	background-color: unset;
-	border: none;
-	color: var(--white);
-	cursor: pointer;
-	padding: 0;
-	text-decoration: none;
+  background-color: unset;
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
   font-size: 0.875rem;
 }
 
 .sideNavLinks li:nth-child(1) {
-	padding-top: 15px;
+  padding-top: 15px;
 }

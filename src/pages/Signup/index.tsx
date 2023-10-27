@@ -11,7 +11,7 @@ const Signup = () => {
     firstName,
     lastName,
     email,
-    password
+    password,
   }: SignedUpUser) => {
     const { error } = await signup({
       firstName,

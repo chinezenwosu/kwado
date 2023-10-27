@@ -19,7 +19,7 @@ const routes = {
   },
   getDiary: (slug: string) => {
     return `/diaries/${slug}`
-  }
+  },
 }
 
 export default routes

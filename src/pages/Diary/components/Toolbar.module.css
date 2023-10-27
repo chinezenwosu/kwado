@@ -57,13 +57,13 @@
     position: relative;
     margin-left: var(--margin-left);
   }
-  
+
   .toolDivider:not(:first-child):before {
     --height: 16px;
     background-color: #cccccc;
     content: '';
     height: var(--height);
-    left: calc(var(--margin-left)/ -2);
+    left: calc(var(--margin-left) / -2);
     position: absolute;
     top: calc(50% - var(--height) / 2);
     width: 1px;

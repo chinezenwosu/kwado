@@ -6,7 +6,7 @@ import { LoggedInUser } from '../../types/User'
 const Login = () => {
   const { login } = useAuth()
   const [error, setError] = useState('')
-  
+
   const handleLogin = async ({ email, password }: LoggedInUser) => {
     const { error } = await login({ email, password })
 

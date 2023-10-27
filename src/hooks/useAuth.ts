@@ -12,7 +12,7 @@ export const useAuth = () => {
 
   useEffect(() => {
     const userItem = getItemWithExpiry('user')
-    
+
     if (userItem) {
       addUser(JSON.parse(userItem))
     }

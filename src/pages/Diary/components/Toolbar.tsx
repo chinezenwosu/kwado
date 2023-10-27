@@ -54,14 +54,14 @@ const formatOptions = [
     {
       name: 'font',
       value: 'arial',
-      options: Font.whitelist.map((value: String) => {
+      options: Font.whitelist.map((value: string) => {
         return { value, label: formatString.hyphenToUpperCamelCase(value) }
       }),
     },
     {
       name: 'size',
       value: '16pt',
-      options: Size.whitelist.map((value: String) => {
+      options: Size.whitelist.map((value: string) => {
         return { value, label: value.replace(/pt/g, '') }
       }),
     },
@@ -79,17 +79,14 @@ const formatOptions = [
     { name: 'indent', value: '-1' },
     { name: 'indent', value: '+1' },
   ],
-  [
-    { name: 'link' },
-    { name: 'image' },
-  ],
+  [{ name: 'link' }, { name: 'image' }],
 ]
 
 type ButtonOption = {
-  name: string,
-  value?: string,
-  custom?: boolean,
-  options?: Array<{ value: string, label: string }>,
+  name: string
+  value?: string
+  custom?: boolean
+  options?: Array<{ value: string; label: string }>
 }
 
 const customTools = {
@@ -107,56 +104,54 @@ const customTools = {
   redo: (
     <button className="ql-redo">
       <svg viewBox="0 0 18 18">
-        <polygon className="ql-fill ql-stroke" points="12 10 14 12 16 10 12 10" />
+        <polygon
+          className="ql-fill ql-stroke"
+          points="12 10 14 12 16 10 12 10"
+        />
         <path
           className="ql-stroke"
           d="M9.91,13.91A4.6,4.6,0,0,1,9,14a5,5,0,1,1,5-5"
         />
       </svg>
     </button>
-  )
+  ),
 }
 
 const Toolbar = () => (
   <div className={styles.toolbarContainer}>
     <div id={TOOLBAR_ID} className={styles.toolbar}>
-      {
-        formatOptions.map((buttons) => {
+      {formatOptions.map((buttons) => {
+        return buttons.map((button: ButtonOption, index: Key) => {
+          let tool = (
+            <button className={`ql-${button.name}`} value={button.value} />
+          )
+
+          if (button.custom) {
+            tool = customTools[button.name as keyof typeof customTools]
+          }
+
+          if (button.options) {
+            tool = (
+              <Select
+                className={`ql-${button.name}`}
+                defaultValue={button.value || ''}
+                options={button.options}
+              />
+            )
+          }
+
           return (
-            buttons.map((button: ButtonOption, index: Key) => {
-              let tool = (
-                <button
-                  className={`ql-${button.name}`}
-                  value={button.value}
-                />
-              )
-
-              if (button.custom) {
-                tool = customTools[button.name as keyof typeof customTools]
-              }
-
-              if (button.options) {
-                tool = (
-                  <Select
-                    className={`ql-${button.name}`}
-                    defaultValue={button.value || ''}
-                    options={button.options}
-                  />
-                )
-              }
-
-              return (
-                <span
-                  key={index}
-                  className={`${styles.toolContainer} ${index === 0 ? styles.toolDivider : ''}`}
-                >
-                  { tool }
-                </span>
-              )
-            })
+            <span
+              key={index}
+              className={`${styles.toolContainer} ${
+                index === 0 ? styles.toolDivider : ''
+              }`}
+            >
+              {tool}
+            </span>
           )
         })
-      }
+      })}
     </div>
   </div>
 )
@@ -164,11 +159,13 @@ const Toolbar = () => (
 const toolbarModules = {
   container: `#${TOOLBAR_ID}`,
   handlers: {
-    undo: function() {
-      (this as any).quill.history.undo()
+    undo: function () {
+      const instance = (this as any).quill
+      instance.history.undo()
     },
-    redo: function() {
-      (this as any).quill.history.redo()
+    redo: function () {
+      const instance = (this as any).quill
+      instance.history.redo()
     },
   },
 }

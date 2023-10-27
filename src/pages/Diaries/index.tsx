@@ -9,7 +9,7 @@ import { Diary } from '../../types/Diary'
 
 const Diaries = () => {
   const [diaries, setDiaries] = useState<Diary[]>([])
-  const [currentDiary, setCurrentDiary] = useState<any>(null)
+  const [currentDiary, setCurrentDiary] = useState<Diary | null>(null)
   const currentDiarySlug = currentDiary?.slug
   const navigate = useNavigate()
 

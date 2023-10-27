@@ -8,7 +8,7 @@ import styles from './CreateDiary.module.css'
 import { Diary } from '../../../types/Diary'
 
 const CreateDiary = ({
-  addDiaryToList
+  addDiaryToList,
 }: {
   addDiaryToList: (diary: Diary) => void
 }) => {
@@ -24,10 +24,7 @@ const CreateDiary = ({
   }
 
   return (
-    <Button
-      className={styles.button}
-      onClick={handleCreateDiary}
-    >
+    <Button className={styles.button} onClick={handleCreateDiary}>
       <AddRounded />
       Create new diary
     </Button>
@@ -35,4 +32,3 @@ const CreateDiary = ({
 }
 
 export default CreateDiary
- 
