@@ -1,101 +1,101 @@
 .sideNav {
-	height: 100%;
-	width: var(--side-nav-width);
-	position: fixed;
-	z-index: 1;
-	top: 0;
-	left: 0;
-	background-color: #f9f9f9;
-	overflow-x: hidden;
-	padding-top: 60px;
-	transition: 0.5s;
-	/* background: #FFA41C; */
-	background: #f9f9f9;
+  height: 100%;
+  width: var(--side-nav-width);
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #f9f9f9;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+  /* background: #FFA41C; */
+  background: #f9f9f9;
 }
 
 .sideNav a:hover {
-	color: #333;
+  color: #333;
 }
 
 .sideNavCheckbox {
-	display: none;
+  display: none;
 }
 
 .sideNavCheckbox ~ main {
-	transition: margin-left 0.5s;
-	margin-left: var(--side-nav-width);
-	width: calc(100% - var(--side-nav-width));
+  transition: margin-left 0.5s;
+  margin-left: var(--side-nav-width);
+  width: calc(100% - var(--side-nav-width));
 }
 
 .sideNavCheckbox:checked ~ .sideNav {
-	width: var(--side-nav-collapsed-width);
-	background: #fbc87c;
+  width: var(--side-nav-collapsed-width);
+  background: #fbc87c;
 }
 
 .sideNavCheckbox:checked ~ main {
-	margin-left: var(--side-nav-collapsed-width);
-	width: calc(100% - var(--side-nav-collapsed-width));
+  margin-left: var(--side-nav-collapsed-width);
+  width: calc(100% - var(--side-nav-collapsed-width));
 }
 
 .sideNavCheckbox:checked ~ .sideNav .sideMenuLabel {
-	opacity: 0;
+  opacity: 0;
 }
 
 .sideNavTrigger {
-	display: flex;
-	padding: 0 15px;
+  display: flex;
+  padding: 0 15px;
 }
 
 .sideMenuLink {
-	align-items: center;
-	color: #0e2350;
-	display: flex;
-	padding: 10px 10px 10px 16px;
-	text-decoration: none;
-	transition: 0.3s;
-	white-space: nowrap;
+  align-items: center;
+  color: #0e2350;
+  display: flex;
+  padding: 10px 10px 10px 16px;
+  text-decoration: none;
+  transition: 0.3s;
+  white-space: nowrap;
 }
 
 .sideMenuLink.active {
-	background: var(--white);
+  background: var(--white);
 }
 
 .sideMenuIcon {
-	display: flex;
-	padding: 2px;
-	margin-right: 17px;
+  display: flex;
+  padding: 2px;
+  margin-right: 17px;
 }
 
 .sideMenuIcon:hover {
-	color: #ef5d1e;
+  color: #ef5d1e;
 }
 
 .sideMenuLabel {
-	font-size: 0.925rem;
-	transition: opacity 0.5s;
-	opacity: 0.5;
+  font-size: 0.925rem;
+  transition: opacity 0.5s;
+  opacity: 0.5;
 }
 
 .sideMenuLink.active .sideMenuLabel {
-	opacity: 1;
+  opacity: 1;
 }
 
 .sideNavLinks {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .sideNavLink {
-	background-color: unset;
-	border: none;
-	color: var(--white);
-	cursor: pointer;
-	padding: 0;
-	text-decoration: none;
-	font-size: 0.875rem;
+  background-color: unset;
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+  font-size: 0.875rem;
 }
 
 .sideNavLinks li:nth-child(1) {
-	padding-top: 15px;
+  padding-top: 15px;
 }

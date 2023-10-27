@@ -1,36 +1,36 @@
 import fetch, { Response } from '../lib/fetch'
 
 const createDiary = async () => {
-	const response: Response = {}
-	const defaultEditorValue = {}
-	const defaultHtmlValue = '<p></p>'
+  const response: Response = {}
+  const defaultEditorValue = {}
+  const defaultHtmlValue = '<p></p>'
 
-	try {
-		const documentRes = await fetch.post('kwadocs', {
-			content: defaultEditorValue,
-			html: defaultHtmlValue,
-			slug: `${Date.now()}-${crypto.randomUUID()}`,
-		})
+  try {
+    const documentRes = await fetch.post('kwadocs', {
+      content: defaultEditorValue,
+      html: defaultHtmlValue,
+      slug: `${Date.now()}-${crypto.randomUUID()}`,
+    })
 
-		response.data = documentRes.data
+    response.data = documentRes.data
 
-		return response
-	} catch (e) {
-		return { error: e }
-	}
+    return response
+  } catch (e) {
+    return { error: e }
+  }
 }
 
 const getDiaries = async () => {
-	const response: Response = {}
+  const response: Response = {}
 
-	try {
-		const documentRes = await fetch.get('kwadocs')
+  try {
+    const documentRes = await fetch.get('kwadocs')
 
-		response.data = documentRes.data
-		return response
-	} catch (e) {
-		return { error: e }
-	}
+    response.data = documentRes.data
+    return response
+  } catch (e) {
+    return { error: e }
+  }
 }
 
 export { createDiary, getDiaries }

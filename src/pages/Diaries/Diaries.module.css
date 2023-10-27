@@ -1,28 +1,28 @@
 .diaries {
-	--submenu-width: 450px;
-	display: flex;
-	flex-direction: row;
+  --submenu-width: 450px;
+  display: flex;
+  flex-direction: row;
 }
 
 .diaries > * {
-	min-height: 100vh;
-	overflow-y: scroll;
-	-ms-overflow-style: none;
-	scrollbar-width: none;
+  min-height: 100vh;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .container {
-	padding: 20px 20px 15px 20px;
-	width: calc(100vw - var(--submenu-width) - var(--side-nav-width));
-	height: 100vh;
+  padding: 20px 20px 15px 20px;
+  width: calc(100vw - var(--submenu-width) - var(--side-nav-width));
+  height: 100vh;
 }
 
 .diaryListContainer {
-	width: var(--submenu-width);
-	border-right: 1px solid #ececec;
+  width: var(--submenu-width);
+  border-right: 1px solid #ececec;
 }
 
 .container::-webkit-scrollbar,
 .diaryListContainer::-webkit-scrollbar {
-	display: none;
+  display: none;
 }
