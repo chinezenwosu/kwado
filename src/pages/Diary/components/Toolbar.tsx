@@ -54,14 +54,14 @@ const formatOptions = [
 		{
 			name: 'font',
 			value: 'arial',
-			options: Font.whitelist.map((value: String) => {
+			options: Font.whitelist.map((value: string) => {
 				return { value, label: formatString.hyphenToUpperCamelCase(value) }
 			}),
 		},
 		{
 			name: 'size',
 			value: '16pt',
-			options: Size.whitelist.map((value: String) => {
+			options: Size.whitelist.map((value: string) => {
 				return { value, label: value.replace(/pt/g, '') }
 			}),
 		},
@@ -160,10 +160,12 @@ const toolbarModules = {
 	container: `#${TOOLBAR_ID}`,
 	handlers: {
 		undo: function () {
-			;(this as any).quill.history.undo()
+			const instance = (this as any).quill
+			instance.history.undo()
 		},
 		redo: function () {
-			;(this as any).quill.history.redo()
+			const instance = (this as any).quill
+			instance.history.redo()
 		},
 	},
 }

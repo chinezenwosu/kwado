@@ -1,7 +1,7 @@
-const debounce = (func: (...args: unknown[]) => void, timeout = 1000) => {
+const debounce = (func: (...args: any[]) => void, timeout = 1000) => {
 	let timer: number
 
-	return (...args: unknown[]) => {
+	return (...args: any[]) => {
 		clearTimeout(timer)
 		timer = setTimeout(() => {
 			func.apply(this, args)
@@ -9,13 +9,10 @@ const debounce = (func: (...args: unknown[]) => void, timeout = 1000) => {
 	}
 }
 
-const debounceLeading = (
-	func: (...args: unknown[]) => void,
-	timeout = 1000,
-) => {
+const debounceLeading = (func: (...args: any[]) => void, timeout = 1000) => {
 	let timer: number | undefined
 
-	return (...args: unknown[]) => {
+	return (...args: any[]) => {
 		if (!timer) {
 			func.apply(this, args)
 		}

@@ -25,6 +25,11 @@ type EditorProps = {
 	modules: { [key: string]: unknown }
 }
 
+type EditorSelectionProps = {
+	clientId: string
+	payload: { data: unknown }
+}
+
 const withCursors =
 	(Component: typeof ReactQuill) => (otherProps: ComponentProps) => {
 		const Editor = (props: EditorProps, forwardedRef: Ref<ReactQuill>) => {
@@ -79,7 +84,7 @@ const withCursors =
 				const editor = quill.getEditor()
 				initializeCursor(editor)
 
-				const selectionHandler = (data: any) => {
+				const selectionHandler = (data: EditorSelectionProps) => {
 					const cursor = editor.getModule('cursors')
 
 					cursor.createCursor(data.clientId, name, color)
