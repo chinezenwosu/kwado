@@ -1,43 +1,13 @@
-:root {
-  --black: #000000;
-  --white: #ffffff;
-  --bg-default: #f9fbfd;
-  --bg-nav: #0e2350;
-  --primary: #1180af;
-  --font-family-default: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;
-  --font-family-editor: Arial, Helvetica, sans-serif;
-}
-
-html, body {
-  color: #333333;
-  font-family: var(--font-family-default);
-  font-size: 1em;
-  margin: 0;
-  padding: 0;
-}
-
-*, *::after, *::before {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-.clearfix, 
-.clearfix::after, 
-.clearfix::before {
-  content: "";
-  display: block;
-  clear: both;
-}
-
-.main {
+main {
   margin-top: 60px;
+  overflow: hidden;
+  width: 100%;
 }
 
 .ql-container.ql-snow,
 .ql-toolbar.ql-snow {
   border: none !important;
-  font-family: Helvetica !important;
+  font-size: 0.925em;
 }
 
 .ql-snow.ql-toolbar button,
@@ -87,6 +57,12 @@ html, body {
   width: calc(100% - 18px);
 }
 
+.ql-editor.ql-blank::before {
+  color: rgba(0, 0, 0, 0.2);
+  left: 0;
+  top: 15px;
+}
+
 .ql-snow .ql-picker.ql-size {
   width: 50px !important;
 }
@@ -101,6 +77,11 @@ html, body {
 
 .ql-editor {
   height: 100vh !important;
+  padding: 0;
+}
+
+.ql-editor > * {
+  margin: revert !important;
 }
 
 .ql-editor[contenteditable="false"],

@@ -11,7 +11,7 @@ import randomColor from 'randomcolor'
 import QuillCursors from 'quill-cursors'
 import ReactQuill, { Range } from 'react-quill'
 import socketConnection, { EditorSocket } from '../lib/socketConnection'
-import { debounceLeading } from '../utils'
+import { debounceLeading, formatString } from '../utils'
 import { AuthContext } from '../context/AuthContext'
 
 Quill.register('modules/cursors', QuillCursors)
@@ -23,8 +23,7 @@ type ComponentProps = {
 const withCursors = (Component: typeof ReactQuill) => (otherProps: ComponentProps) => {
   return forwardRef((props: any, forwardedRef) => {
     const { user } = useContext(AuthContext)
-    const { firstName = '', lastName = '' } = user || {}
-    const name = `${firstName} ${lastName}`.trim()
+    const name = formatString.getUserFullName(user)
     const color = useMemo(
       () =>
         randomColor({

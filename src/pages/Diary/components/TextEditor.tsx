@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react'
-import ReactQuill, { Value } from 'react-quill'
+import React, { useEffect, useRef } from 'react'
+import ReactQuill from 'react-quill'
 import Quill, { DeltaStatic } from 'quill'
 import { toolbarModules } from './Toolbar'
 import withCursors from '../../../hoc/withCursors'
@@ -8,13 +8,6 @@ import styles from './TextEditor.module.css'
 import 'react-quill/dist/quill.snow.css'
 
 export const defaultEditorValue = {}
-
-type Payload = {
-  payload: {
-    data: Value,
-    delta: DeltaStatic,
-  }
-}
 
 const TextEditor = ({ socket, document }: {
   socket: EditorSocket,
@@ -36,8 +29,8 @@ const TextEditor = ({ socket, document }: {
     const editor = quill.getEditor()
     initializeSelection(editor)
 
-    const contentHandler = (data: Payload) => {
-      editor.updateContents(data.payload.delta)
+    const contentHandler = (delta: DeltaStatic) => {
+      editor.updateContents(delta)
     }
 
     socket.on(socketConnection.editorEmissions.RECEIVE_DOCUMENT_CONTENT_CHANGES, contentHandler)

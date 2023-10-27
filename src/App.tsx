@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import axios from 'axios'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router,
   Routes,
   Route,
@@ -7,20 +6,29 @@ import { BrowserRouter as Router,
   useLocation,
 } from 'react-router-dom'
 import Navbar from './layout/Navbar'
+import SideNavbar from './layout/SideNavbar'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Logout from './pages/Logout'
 import Signup from './pages/Signup'
 import Diary from './pages/Diary'
 import Dashboard from './pages/Dashboard'
-import { config, routes } from './utils'
+import Diaries from './pages/Diaries'
+import { routes } from './utils'
 import { useAuth } from './hooks/useAuth'
 import { AuthContext } from './context/AuthContext'
 import './App.css'
 
+type RouteObject = {
+  path: string
+  element: React.JSX.Element
+  requiresAuth: boolean
+  children?: RouteObject[]
+}
+
 const App = () => {
-  const { user, loginWithUser, isAuthInitialized } = useAuth()
-  const routesList = [
+  const { user, loginWithSession, isAuthInitialized } = useAuth()
+  const routesList: RouteObject[] = [
     {
       path: routes.getHome(),
       element: <Home />,
@@ -47,20 +55,22 @@ const App = () => {
       requiresAuth: true,
     },
     {
-      path: routes.getDiary(':slug'),
-      element: <Diary />,
+      path: routes.getDiaries(),
+      element: <Diaries />,
       requiresAuth: true,
+      children: [
+        {
+          path: routes.getDiary(':slug'),
+          element: <Diary />,
+          requiresAuth: true,
+        },
+      ],
     },
   ]
 
   useEffect(() => {
     if (isAuthInitialized && !user) {
-      axios.get(`${config.url.api}/users/session`, { withCredentials: true })
-        .then(({ data }) => {
-          if (data.isLoggedIn) {
-            loginWithUser(data.user)
-          }
-        })
+      loginWithSession()
     }
   }, [isAuthInitialized])
 
@@ -86,31 +96,36 @@ const App = () => {
     return children
   }
 
+  const getRoutes = (routes: RouteObject[] | undefined) => {
+    return (routes || []).map((route) => (
+      <Route
+        key={route.path}
+        path={route.path}
+        element={
+          route.requiresAuth ? (
+            <ProtectedRoute>
+              { route.element }
+            </ProtectedRoute>
+          ) : (
+            <PublicRoute>
+              { route.element }
+            </PublicRoute>
+          )
+        }
+      >
+        { getRoutes(route.children) }
+      </Route>
+    ))
+  }
+
   return (
     <AuthContext.Provider value={{ user, setUser: () => null }}>
       <Router>
-        <Navbar isLoggedIn={!!user} />
-        <main className="main">
+        <Navbar loggedInUser={user} />
+        <SideNavbar loggedInUser={user} />
+        <main>
           <Routes>
-            {
-              routesList.map((route) => (
-                <Route
-                  key={route.path}
-                  path={route.path}
-                  element={
-                    route.requiresAuth ? (
-                      <ProtectedRoute>
-                        { route.element }
-                      </ProtectedRoute>
-                    ) : (
-                      <PublicRoute>
-                        { route.element }
-                      </PublicRoute>
-                    )
-                  }
-                />
-              ))
-            }
+            { getRoutes(routesList) }
           </Routes>
         </main>
       </Router>

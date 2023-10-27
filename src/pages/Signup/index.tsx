@@ -1,37 +1,29 @@
 import { useState } from 'react'
-import axios from 'axios'
 import SignupForm from './components/Form'
-import { config } from '../../utils'
 import { useAuth } from '../../hooks/useAuth'
+import { SignedUpUser } from '../../types/User'
 
 const Signup = () => {
   const [error, setError] = useState('')
-  const { login } = useAuth()
+  const { signup } = useAuth()
 
-  const handleSignup = async ({ firstName, lastName, email, password }: {
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-  }) => {
-    try {
-      await axios.post(`${config.url.api}/users/signup`, {
-        firstName,
-        lastName,
-        email,
-        password,
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
-      })
+  const handleSignup = async ({
+    firstName,
+    lastName,
+    email,
+    password
+  }: SignedUpUser) => {
+    const { error } = await signup({
+      firstName,
+      lastName,
+      email,
+      password,
+    })
 
-      login()
+    if (error) {
+      setError(error?.response?.data)
+    } else {
       window.location.reload()
-    }
-    catch(err: any) {
-      setError(err)
     }
   }
 

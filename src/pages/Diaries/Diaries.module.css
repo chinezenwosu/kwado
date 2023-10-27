@@ -1,10 +1,10 @@
-.dashboard {
+.diaries {
   --submenu-width: 450px;
   display: flex;
   flex-direction: row;
 }
 
-.dashboard > * {
+.diaries > * {
   min-height: 100vh;
   overflow-y: scroll;
   -ms-overflow-style: none;
@@ -17,6 +17,12 @@
   height: 100vh;
 }
 
-.container::-webkit-scrollbar {
+.diaryListContainer {
+  width: var(--submenu-width);
+  border-right: 1px solid #ececec;
+}
+
+.container::-webkit-scrollbar,
+.diaryListContainer::-webkit-scrollbar {
   display: none;
 }
