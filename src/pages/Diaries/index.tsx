@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { getDiaries } from '../../api/editor'
 import DiaryList from './components/DiaryList'
@@ -30,10 +30,10 @@ const Diaries = () => {
     }
   }
 
-  const handleDiaryChange = (diary: Diary) => {
+  const handleDiaryChange = useCallback((diary: Diary) => {
     setCurrentDiary(diary)
     navigate(routes.getDiary(diary.slug))
-  }
+  }, [])
 
   const addDiaryToList = (diary: Diary) => {
     setDiaries((prev) => {
