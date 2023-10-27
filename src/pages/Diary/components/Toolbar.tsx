@@ -1,4 +1,4 @@
-import React, { Key } from 'react'
+import { Key } from 'react'
 import { Quill } from 'react-quill'
 import { Select } from '../../../components/Input'
 import { formatString } from '../../../utils'

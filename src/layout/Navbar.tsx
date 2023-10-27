@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { formatString, routes } from '../utils'
 import { MenuRounded } from '@mui/icons-material'

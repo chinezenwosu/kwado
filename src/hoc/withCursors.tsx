@@ -7,7 +7,7 @@ import {
   useMemo,
   useRef,
 } from 'react'
-import Quill from 'quill'
+import Quill, { DeltaStatic } from 'quill'
 import randomColor from 'randomcolor'
 import QuillCursors from 'quill-cursors'
 import ReactQuill, { Range } from 'react-quill'
@@ -22,7 +22,18 @@ type ComponentProps = {
 }
 
 type EditorProps = {
-  modules: { [key: string]: unknown }
+  modules: { [key: string]: any }
+  className: string
+  placeholder: string
+  theme: string
+  readOnly: boolean
+  value: DeltaStatic
+  onChange: (
+    _content: string,
+    delta: DeltaStatic,
+    source: string,
+    editor: ReactQuill.UnprivilegedEditor
+  ) => void
 }
 
 type EditorSelectionProps = {

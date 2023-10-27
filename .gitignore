@@ -15,6 +15,7 @@
 .vscode/*
 !.vscode/extensions.json
 .DS_Store
+*.tsbuildinfo
 
 # environment
 .env

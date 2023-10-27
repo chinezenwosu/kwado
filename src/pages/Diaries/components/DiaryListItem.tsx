@@ -25,7 +25,7 @@ const DiaryListItem = ({
       onClick={() => setCurrentDiary(diary)}
     >
       <h5 className={styles.title}>
-        Diary entry from {formatDate.fromNow(diary.createdAt)}
+        Diary entry from {formatDate.calendar(diary.createdAt)}
       </h5>
       <p className={styles.content}>
         <span
