@@ -32,6 +32,9 @@ const formatDate = {
   fromNow: (dateStr: string, skipSuffix?: boolean) => {
     return moment(dateStr).fromNow(skipSuffix)
   },
+  calendar: (dateStr: string, format = 'Do MMM YYYY') => {
+    return moment(dateStr).format(format)
+  },
 }
 
 export default formatDate
