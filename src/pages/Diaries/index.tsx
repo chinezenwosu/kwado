@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { getDiaries } from '../../api/editor'
 import DiaryList from './components/DiaryList'
@@ -10,7 +10,7 @@ import { Diary } from '../../types/Diary'
 const Diaries = () => {
   const [diaries, setDiaries] = useState<Diary[]>([])
   const [currentDiary, setCurrentDiary] = useState<Diary | null>(null)
-  const currentDiarySlug = currentDiary?.slug
+  const currentDiarySlug = currentDiary?.slug || ''
   const navigate = useNavigate()
 
   useEffect(() => {

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link, useLocation, useMatch } from 'react-router-dom'
 import { routes } from '../utils'
 import { LogoutOutlined, GridView, SubjectRounded } from '@mui/icons-material'

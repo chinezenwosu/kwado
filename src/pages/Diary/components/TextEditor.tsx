@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import ReactQuill from 'react-quill'
 import Quill, { DeltaStatic } from 'quill'
 import { toolbarModules } from './Toolbar'
