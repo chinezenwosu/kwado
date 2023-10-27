@@ -12,9 +12,7 @@ const createDiary = async() => {
       slug: `${Date.now()}-${crypto.randomUUID()}`,
     })
 
-    response.data = {
-      slug: documentRes.data.slug
-    }
+    response.data = documentRes.data
 
     return response
   }

@@ -8,7 +8,7 @@ import styles from './Diaries.module.css'
 import { Diary } from '../../types/Diary'
 
 const Diaries = () => {
-  const [diaries, setDiaries] = useState([])
+  const [diaries, setDiaries] = useState<Diary[]>([])
   const [currentDiary, setCurrentDiary] = useState<any>(null)
   const currentDiarySlug = currentDiary?.slug
   const navigate = useNavigate()
@@ -35,12 +35,19 @@ const Diaries = () => {
     navigate(routes.getDiary(diary.slug))
   }
 
+  const addDiaryToList = (diary: Diary) => {
+    setDiaries((prev) => {
+      prev.unshift(diary)
+      return prev
+    })
+  }
+
   if (!currentDiary) return null
 
   return (
     <div className={styles.diaries}>
       <div className={`${styles.container} ${styles.diaryListContainer}`}>
-        <CreateDiary />
+        <CreateDiary addDiaryToList={addDiaryToList} />
         <DiaryList
           diaries={diaries}
           currentDiarySlug={currentDiarySlug}

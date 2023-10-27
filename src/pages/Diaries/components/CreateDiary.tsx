@@ -5,14 +5,20 @@ import Button from '../../../components/Button'
 import { createDiary } from '../../../api/editor'
 import { AddRounded } from '@mui/icons-material'
 import styles from './CreateDiary.module.css'
+import { Diary } from '../../../types/Diary'
 
-const CreateDiary = () => {
+const CreateDiary = ({
+  addDiaryToList
+}: {
+  addDiaryToList: (diary: Diary) => void
+}) => {
   const navigate = useNavigate()
 
   const handleCreateDiary = async () => {
     const response = await createDiary()
 
     if (response.data) {
+      addDiaryToList(response.data)
       navigate(routes.getDiary(response.data.slug))
     }
   }
