@@ -57,6 +57,12 @@ main {
   width: calc(100% - 18px);
 }
 
+.ql-editor.ql-blank::before {
+  color: rgba(0, 0, 0, 0.2);
+  left: 0;
+  top: 15px;
+}
+
 .ql-snow .ql-picker.ql-size {
   width: 50px !important;
 }
