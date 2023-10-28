@@ -1,0 +1,63 @@
+.pageNotfound {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.title {
+  --letter-spacing-ratio: -8.33;
+  --font-size: 5rem;
+  background: -webkit-linear-gradient(
+    270deg,
+    #ffffff 0%,
+    var(--color-pastel-orange) 35%,
+    var(--color-saffron) 65%,
+    var(--color-carrot) 60%
+  );
+  background-clip: text;
+  color: var(--color-pastel-orange);
+  font-size: var(--font-size);
+  font-weight: 100;
+  letter-spacing: calc(var(--font-size) / var(--letter-spacing-ratio));
+  margin: -3% 0 0;
+  user-select: none;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.actionText {
+  font-family: var(--font-family-secondary);
+  text-align: center;
+}
+
+.homeLink {
+  color: var(--color-carrot);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.homeLink:hover {
+  text-decoration: underline;
+}
+
+@media only screen and (min-width: 768px) {
+  .title {
+    --font-size: 7rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .title {
+    --font-size: 10rem;
+  }
+
+  .actionText {
+    font-size: 1.125rem;
+  }
+}

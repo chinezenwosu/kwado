@@ -9,7 +9,7 @@
   overflow-x: hidden;
   padding-top: 60px;
   transition: 0.5s;
-  /* background: #FFA41C; */
+  /* background: var(--color-saffron); */
   background: #f9f9f9;
 }
 
@@ -29,7 +29,7 @@
 
 .sideNavCheckbox:checked ~ .sideNav {
   width: var(--side-nav-collapsed-width);
-  background: #fbc87c;
+  background: var(--color-pastel-orange);
 }
 
 .sideNavCheckbox:checked ~ main {
@@ -67,7 +67,7 @@
 }
 
 .sideMenuIcon:hover {
-  color: #ef5d1e;
+  color: var(--color-carrot);
 }
 
 .sideMenuLabel {
