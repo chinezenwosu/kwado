@@ -19,6 +19,7 @@ import { routes } from './utils'
 import { useAuth } from './hooks/useAuth'
 import { AuthContext } from './context/AuthContext'
 import './App.css'
+import PageNotFound from './pages/404Page'
 
 type RouteObject = {
   path: string
@@ -66,6 +67,11 @@ const App = () => {
           requiresAuth: true,
         },
       ],
+    },
+    {
+      path: '*',
+      element: <PageNotFound />,
+      requiresAuth: false,
     },
   ]
 
