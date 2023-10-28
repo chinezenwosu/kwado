@@ -3,7 +3,9 @@
   --white: #ffffff;
   --bg-default: #f9fbfd;
   --bg-nav: rgba(14, 35, 80, 0.9);
-  --primary: #1180af;
+  --color-carrot: #ef5d1e;
+  --color-saffron: #ffa41c;
+  --color-pastel-orange: #fbc87c;
   --font-family-generic: Arial, Helvetica, sans-serif;
   --font-family-primary: Cabin, 'Lucida Sans Unicode', serif;
   --font-family-secondary: Raleway, 'Lucida Grande', var(--font-family-generic);
@@ -11,7 +13,6 @@
   --side-nav-collapsed-width: 61px;
 }
 
-html,
 body {
   color: #333333;
   font-family: var(--font-family-primary);
